@@ -15,6 +15,7 @@ namespace ShopAction.Data.Entities
         public string SeoAlias { get; set; }
         public List<ProductInCategory> ProductInCategories { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
+        public List<ProductTranslation> ProductTranslations { get; set; }
         public Product()
         {
             Id = new Guid();

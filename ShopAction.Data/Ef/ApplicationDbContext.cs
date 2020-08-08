@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopAction.Data.Configuration;
 using ShopAction.Data.Entities;
+using ShopAction.Data.Extension;
 
 namespace ShopAction.Data.Ef
 {
@@ -15,6 +16,13 @@ namespace ShopAction.Data.Ef
             modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
+            modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.Seed();
             //base.OnModelCreating(modelBuilder);
         }
         public DbSet<Product> Products { get; set; }
