@@ -15,5 +15,6 @@ namespace ShopAction.Data.Entities
         public string ShipPhoneNumber { get; set; }
         public OrderStatus Status { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
