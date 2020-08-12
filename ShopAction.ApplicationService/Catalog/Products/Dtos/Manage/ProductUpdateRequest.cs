@@ -13,6 +13,6 @@ namespace ShopAction.ApplicationService.Catalog.Products.Dtos.Manage
         public string SeoDescription { set; get; }
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
-        public Guid LanguageId { set; get; }
+        public Guid LanguageId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ShopAction.ApplicationService.Catalog.Products.Dtos.Manage;
+﻿using ShopAction.ApplicationService.Catalog.Products.Dtos;
+using ShopAction.ApplicationService.Catalog.Products.Dtos.Public;
 using ShopAction.ApplicationService.Dtos;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,6 @@ namespace ShopAction.ApplicationService.Catalog.Products
 {
     public interface IPublicProductService
     {
-        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(Guid categoryId, int pageIndex, int pageSize);
+        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request);
     }
 }

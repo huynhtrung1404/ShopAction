@@ -17,9 +17,6 @@ namespace ShopAction.Data.Entities
         public List<ProductInCategory> ProductInCategories { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
         public List<ProductTranslation> ProductTranslations { get; set; }
-        public Product()
-        {
-            Id = new Guid();
-        }
+        public List<ProductImage> ProductImages { get; set; }
     }
 }
