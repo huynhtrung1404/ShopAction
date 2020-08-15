@@ -3,18 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopAction.ViewModels.Catalog.Products.Manage
+namespace ShopAction.ViewModels.Catalog.Products
 {
-    public class ProductUpdateRequest
+    public class ProductCreateRequest
     {
-        public Guid Id { get; set; }
+        public decimal Price { set; get; }
+        public decimal OriginalPrice { set; get; }
+        public int Stock { set; get; }
         public string Name { set; get; }
         public string Description { set; get; }
         public string Details { set; get; }
         public string SeoDescription { set; get; }
         public string SeoTitle { set; get; }
+
         public string SeoAlias { get; set; }
-        public Guid LanguageId { get; set; }
+        public string LanguageId { set; get; }
         public IFormFile Img { get; set; }
     }
 }

@@ -6,7 +6,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.ViewModels.Commons;
 using ShopAction.ViewModels.Catalog.Products;
-using ShopAction.ViewModels.Catalog.Products.Public;
 
 namespace ShopAction.ApplicationService.Catalog.Products
 {
@@ -18,7 +17,27 @@ namespace ShopAction.ApplicationService.Catalog.Products
         {
             this.context = context;
         }
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
+
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in context.Products
+                        select new { p };
+            var data = await query.Select(p => new ProductViewModel()
+            {
+                Id = p.p.Id,
+               
+                DateCreated = p.p.DateCreated,
+              
+                OriginalPrice = p.p.OriginalPrice,
+                Price = p.p.Price,
+              
+                Stock = p.p.Stock,
+                ViewCount = p.p.ViewCount
+            }).ToListAsync();
+            return data;
+        }
+
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             var query = from p in context.Products
                         join pt in context.ProductTranslations on p.Id equals pt.ProductId
