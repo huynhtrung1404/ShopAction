@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopAction.ViewModels.Catalog.Products.Public
+namespace ShopAction.ViewModels.Catalog.Products
 {
-    public class GetProductPagingRequest : PagingRequestBase
+    public class GetPublicProductPagingRequest : PagingRequestBase
     {
         public Guid? CategoryId { get; set; }
     }

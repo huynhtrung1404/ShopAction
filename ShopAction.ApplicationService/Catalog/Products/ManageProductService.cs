@@ -5,7 +5,6 @@ using ShopAction.Data.Ef;
 using ShopAction.Data.Entities;
 using ShopAction.Utilities.Exceptions;
 using ShopAction.ViewModels.Catalog.Products;
-using ShopAction.ViewModels.Catalog.Products.Manage;
 using ShopAction.ViewModels.Commons;
 using System;
 using System.Collections.Generic;
@@ -77,7 +76,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
         }
 
 
-        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
             var query = from p in context.Products
                         join pt in context.ProductTranslations on p.Id equals pt.ProductId
