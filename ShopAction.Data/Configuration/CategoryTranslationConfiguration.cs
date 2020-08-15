@@ -11,7 +11,7 @@ namespace ShopAction.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<CategoryTranslation> builder)
         {
-            builder.HasKey(x => new { x.CategoryId, x.LanguageId });
+            builder.HasKey(x => x.Id);
             builder.ToTable("CategoryTranslations");
             builder.HasOne(x => x.Language).WithMany(x => x.CategoryTranslations).HasForeignKey(x => x.LanguageId);
             builder.HasOne(x => x.Category).WithMany(x => x.CategoryTranslations).HasForeignKey(x => x.CategoryId);
