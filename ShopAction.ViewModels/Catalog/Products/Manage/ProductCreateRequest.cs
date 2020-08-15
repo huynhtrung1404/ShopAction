@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopAction.ApplicationService.Catalog.Products.Dtos.Manage
+namespace ShopAction.ViewModels.Catalog.Products.Manage
 {
     public class ProductCreateRequest
     {
@@ -17,5 +18,6 @@ namespace ShopAction.ApplicationService.Catalog.Products.Dtos.Manage
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
+        public IFormFile Img { get; set; }
     }
 }

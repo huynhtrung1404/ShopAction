@@ -1,14 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShopAction.ApplicationService.Catalog.Products.Dtos;
-using ShopAction.ApplicationService.Catalog.Products.Dtos.Manage;
-using ShopAction.ApplicationService.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using ShopAction.ApplicationService.Common;
 using ShopAction.Data.Ef;
 using ShopAction.Data.Entities;
 using ShopAction.Utilities.Exceptions;
+using ShopAction.ViewModels.Catalog.Products;
+using ShopAction.ViewModels.Catalog.Products.Manage;
+using ShopAction.ViewModels.Commons;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace ShopAction.ApplicationService.Catalog.Products
@@ -16,9 +19,11 @@ namespace ShopAction.ApplicationService.Catalog.Products
     public class ManageProductService : IManageProductService
     {
         private readonly ApplicationDbContext context;
-        public ManageProductService(ApplicationDbContext context)
+        private readonly IStorageService storage;
+        public ManageProductService(ApplicationDbContext context, IStorageService storage)
         {
             this.context = context;
+            this.storage = storage;
         }
 
         public async Task AddViewCount(Guid productId)
@@ -50,6 +55,23 @@ namespace ShopAction.ApplicationService.Catalog.Products
                     }
                 }
             };
+
+            if (request.Img != null)
+            {
+                product.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Caption = "Thumnail image",
+                        DateCreated = DateTime.Now,
+                        FileSize = request.Img.Length,
+                        Path = await this.SaveFile(request.Img),
+                        IsDefault = true,
+                        SortOrder = 1
+                        
+                    }
+                };
+            }
             context.Products.Add(product);
             return await context.SaveChangesAsync();
         }
@@ -110,6 +132,16 @@ namespace ShopAction.ApplicationService.Catalog.Products
             productTranslation.SeoTitle = request.SeoTitle;
             productTranslation.Description = request.Description;
             productTranslation.Details = request.Details;
+            if (request.Img != null)
+            {
+                var thumb = context.ProductImages.FirstOrDefault(i => i.IsDefault == true && i.ProductId == request.Id);
+                if (thumb != null)
+                {
+                    thumb.FileSize = request.Img.Length;
+                    thumb.Path = await this.SaveFile(request.Img);
+                    context.ProductImages.Update(thumb);
+                }
+            }
             return await context.SaveChangesAsync();
         }
 
@@ -133,9 +165,41 @@ namespace ShopAction.ApplicationService.Catalog.Products
         {
             var product = await context.Products.FindAsync(productId);
             if (product == null) throw new ShopActionException($"Cannot find a product with Id: {product}");
+
+            var thumbs =  context.ProductImages.Where(x => x.ProductId == productId);
+            foreach (var thumb in thumbs)
+            {
+               await storage.DeleteFileAsync(thumb.Path);
+            }
             context.Products.Remove(product);
+
             return await context.SaveChangesAsync();
         }
 
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await storage.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
+        }
+
+        public Task<int> AddImages(int productId, List<IFormFile> files)
+        {
+            //will be implement in future
+            throw new NotImplementedException();
+        }
+
+        public Task<int> RemoveImages(int imageId)
+        {
+            // will be implement in future
+            throw new ShopActionException("Method doesn't init because it isn't important now");
+        }
+
+        public Task<int> UpdateImage(int imageId, string caption, bool isDefault)
+        {
+            // will be implement in future
+            throw new NotImplementedException("Method doesn't init because it isn't important now");
+        }
     }
 }

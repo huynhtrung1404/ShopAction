@@ -1,9 +1,6 @@
-﻿using ShopAction.ApplicationService.Catalog.Products.Dtos;
-using ShopAction.ApplicationService.Catalog.Products.Dtos.Public;
-using ShopAction.ApplicationService.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ShopAction.ViewModels.Catalog.Products;
+using ShopAction.ViewModels.Catalog.Products.Public;
+using ShopAction.ViewModels.Commons;
 using System.Threading.Tasks;
 
 namespace ShopAction.ApplicationService.Catalog.Products

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopAction.ApplicationService.Catalog.Products.Dtos.Manage
+namespace ShopAction.ViewModels.Catalog.Products.Manage
 {
     public class ProductUpdateRequest
     {
@@ -14,5 +15,6 @@ namespace ShopAction.ApplicationService.Catalog.Products.Dtos.Manage
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
         public Guid LanguageId { get; set; }
+        public IFormFile Img { get; set; }
     }
 }

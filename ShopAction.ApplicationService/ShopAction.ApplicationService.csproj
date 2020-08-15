@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShopAction.Data\ShopAction.Data.csproj" />
-    <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Products\Dtos\Public\" />
+    <ProjectReference Include="..\ShopAction.Data\ShopAction.Data.csproj" />
+    <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
+    <ProjectReference Include="..\ShopAction.ViewModels\ShopAction.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

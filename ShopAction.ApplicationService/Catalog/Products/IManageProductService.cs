@@ -1,9 +1,9 @@
-﻿using ShopAction.ApplicationService.Catalog.Products.Dtos;
-using ShopAction.ApplicationService.Catalog.Products.Dtos.Manage;
-using ShopAction.ApplicationService.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using ShopAction.ViewModels.Catalog.Products;
+using ShopAction.ViewModels.Catalog.Products.Manage;
+using ShopAction.ViewModels.Commons;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ShopAction.ApplicationService.Catalog.Products
@@ -17,5 +17,8 @@ namespace ShopAction.ApplicationService.Catalog.Products
         Task<bool> UpdateStock(Guid productId, int addedQUantity);
         Task AddViewCount(Guid productId);
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
+        Task<int> AddImages(int productId, List<IFormFile> files);
+        Task<int> RemoveImages(int imageId);
+        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
     }
 }

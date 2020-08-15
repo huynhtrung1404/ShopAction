@@ -1,12 +1,12 @@
-﻿using ShopAction.ApplicationService.Catalog.Products.Dtos;
-using ShopAction.ApplicationService.Dtos;
-using ShopAction.Data.Ef;
+﻿using ShopAction.Data.Ef;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ShopAction.ApplicationService.Catalog.Products.Dtos.Public;
+using ShopAction.ViewModels.Commons;
+using ShopAction.ViewModels.Catalog.Products;
+using ShopAction.ViewModels.Catalog.Products.Public;
 
 namespace ShopAction.ApplicationService.Catalog.Products
 {
