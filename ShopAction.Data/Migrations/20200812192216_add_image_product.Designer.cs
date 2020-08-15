@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopAction.Data.Ef;
 
 namespace ShopAction.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200812192216_add_image_product")]
+    partial class add_image_product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,13 +350,13 @@ namespace ShopAction.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ec23d226-ad84-4295-9c11-358c9010efb2"),
+                            Id = new Guid("c2781b86-10de-42d8-8105-d63d35113625"),
                             IsDefault = true,
                             Name = "Tieng Viet"
                         },
                         new
                         {
-                            Id = new Guid("b1c79d3f-be23-464e-8be6-abe9c16b2723"),
+                            Id = new Guid("dcf955d8-ff45-46f0-bf20-5ebd5f725f3f"),
                             IsDefault = false,
                             Name = "English"
                         });
@@ -463,8 +465,8 @@ namespace ShopAction.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
+                    b.Property<int>("FileSize")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
