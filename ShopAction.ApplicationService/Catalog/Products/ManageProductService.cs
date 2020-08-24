@@ -32,7 +32,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
             await context.SaveChangesAsync();
         }
 
-        public async Task<int> Create(ProductCreateRequest request)
+        public async Task<Guid> Create(ProductCreateRequest request)
         {
             var product = new Product()
             {
@@ -72,7 +72,8 @@ namespace ShopAction.ApplicationService.Catalog.Products
                 };
             }
             context.Products.Add(product);
-            return await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
+            return product.Id;
         }
 
 
@@ -198,6 +199,11 @@ namespace ShopAction.ApplicationService.Catalog.Products
         public Task<int> UpdateImage(int imageId, string caption, bool isDefault)
         {
             // will be implement in future
+            throw new NotImplementedException("Method doesn't init because it isn't important now");
+        }
+
+        public Task<ProductViewModel> GetProductById(Guid Id)
+        {
             throw new NotImplementedException("Method doesn't init because it isn't important now");
         }
     }

@@ -9,7 +9,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
 {
     public interface IManageProductService
     {
-        Task<int> Create(ProductCreateRequest request);
+        Task<Guid> Create(ProductCreateRequest request);
         Task<int> Update(ProductUpdateRequest request);
         Task<int> Delete(Guid productId);
         Task<bool> UpdatePrice(Guid productId, decimal newPrice);
@@ -19,5 +19,6 @@ namespace ShopAction.ApplicationService.Catalog.Products
         Task<int> AddImages(int productId, List<IFormFile> files);
         Task<int> RemoveImages(int imageId);
         Task<int> UpdateImage(int imageId, string caption, bool isDefault);
+        Task<ProductViewModel> GetProductById(Guid Id);
     }
 }
