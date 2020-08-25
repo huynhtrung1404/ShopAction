@@ -7,6 +7,7 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>18b297fa-4c38-4a91-b647-619b174ba21b</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NSwag.AspNetCore" Version="13.7.0" />

@@ -23,10 +23,10 @@ namespace ShopAction.Api.Controllers
             var result = await publicProductService.GetAll();
             return Ok(result);
         }
-        [HttpGet("GetProductById/{id}")]
-        public async Task<IActionResult> GetProductById(Guid id)
+        [HttpGet("GetProductById/{id}/{languageId}")]
+        public async Task<IActionResult> GetProductById(Guid id, Guid languageId)
         {
-            var result = await manageProductService.GetProductById(id);
+            var result = await manageProductService.GetProductById(id,languageId);
             if (result == null)
             {
                 return NotFound();
@@ -42,7 +42,7 @@ namespace ShopAction.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]ProductCreateRequest request)
+        public async Task<IActionResult> Create([FromForm]ProductCreateRequest request)
         {
             var result = await manageProductService.Create(request);
             if (result == Guid.Empty)
@@ -50,8 +50,8 @@ namespace ShopAction.Api.Controllers
                 return BadRequest();
             }
 
-            var product = await manageProductService.GetProductById(result);
-            return CreatedAtAction(nameof(GetProductById), new { id = result},product );
+            var product = await manageProductService.GetProductById(result,Guid.Parse(request.LanguageId));
+            return Ok(product.Id);
         }
 
         [HttpPut]

@@ -32,9 +32,9 @@ namespace ShopAction.Api
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
             services.AddControllers();
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddTransient<IManageProductService, ManageProductService>();
-            services.AddTransient<IStorageService, FileStorageService>();
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>

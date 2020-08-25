@@ -16,9 +16,9 @@ namespace ShopAction.ApplicationService.Catalog.Products
         Task<bool> UpdateStock(Guid productId, int addedQUantity);
         Task AddViewCount(Guid productId);
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
-        Task<int> AddImages(int productId, List<IFormFile> files);
-        Task<int> RemoveImages(int imageId);
-        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
-        Task<ProductViewModel> GetProductById(Guid Id);
+        Task<int> AddImages(Guid productId, List<IFormFile> files);
+        Task<int> RemoveImages(Guid imageId);
+        Task<int> UpdateImage(Guid imageId, string caption, bool isDefault);
+        Task<ProductViewModel> GetProductById(Guid id, Guid languageId);
     }
 }
