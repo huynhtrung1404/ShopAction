@@ -9,15 +9,16 @@ namespace ShopAction.ApplicationService.Catalog.Products
 {
     public interface IManageProductService
     {
-        Task<int> Create(ProductCreateRequest request);
+        Task<Guid> Create(ProductCreateRequest request);
         Task<int> Update(ProductUpdateRequest request);
         Task<int> Delete(Guid productId);
         Task<bool> UpdatePrice(Guid productId, decimal newPrice);
         Task<bool> UpdateStock(Guid productId, int addedQUantity);
         Task AddViewCount(Guid productId);
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
-        Task<int> AddImages(int productId, List<IFormFile> files);
-        Task<int> RemoveImages(int imageId);
-        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
+        Task<int> AddImages(Guid productId, List<IFormFile> files);
+        Task<int> RemoveImages(Guid imageId);
+        Task<int> UpdateImage(Guid imageId, string caption, bool isDefault);
+        Task<ProductViewModel> GetProductById(Guid id, Guid languageId);
     }
 }

@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.7" />
+    <Compile Remove="Catalog\Products\Manage\**" />
+    <Compile Remove="Catalog\Products\Public\**" />
+    <EmbeddedResource Remove="Catalog\Products\Manage\**" />
+    <EmbeddedResource Remove="Catalog\Products\Public\**" />
+    <None Remove="Catalog\Products\Manage\**" />
+    <None Remove="Catalog\Products\Public\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Products\Manage\" />
-    <Folder Include="Catalog\Products\Public\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.7" />
   </ItemGroup>
 
 </Project>

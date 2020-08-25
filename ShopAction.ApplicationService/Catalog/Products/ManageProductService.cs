@@ -32,10 +32,11 @@ namespace ShopAction.ApplicationService.Catalog.Products
             await context.SaveChangesAsync();
         }
 
-        public async Task<int> Create(ProductCreateRequest request)
+        public async Task<Guid> Create(ProductCreateRequest request)
         {
             var product = new Product()
             {
+                Id = new Guid(),
                 Price = request.Price,
                 OriginalPrice = request.OriginalPrice,
                 Stock = request.Stock,
@@ -45,6 +46,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
                 {
                     new ProductTranslation()
                     {
+                        Id = new Guid(),
                         Name = request.Name,
                         Description = request.Description,
                         Details = request.Details,
@@ -61,6 +63,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
                 {
                     new ProductImage()
                     {
+                        Id = Guid.NewGuid(),
                         Caption = "Thumnail image",
                         DateCreated = DateTime.Now,
                         FileSize = request.Img.Length,
@@ -72,7 +75,8 @@ namespace ShopAction.ApplicationService.Catalog.Products
                 };
             }
             context.Products.Add(product);
-            return await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
+            return product.Id;
         }
 
 
@@ -175,30 +179,80 @@ namespace ShopAction.ApplicationService.Catalog.Products
             return await context.SaveChangesAsync();
         }
 
+        public async Task<int> AddImages(Guid productId, List<IFormFile> files)
+        {
+            var listProduct = new List<ProductImage>();
+            foreach (var value in files)
+            {
+                var productImage = new ProductImage
+                {
+                    Id = new Guid(),
+                    Caption = "",
+                    ProductId = productId,
+                    FileSize = value.Length,
+                    Path = await SaveFile(value),
+                    IsDefault = true,
+                    SortOrder = 1
+                };
+                listProduct.Add(productImage);
+            }
+            await context.ProductImages.AddRangeAsync(listProduct);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<int> RemoveImages(Guid imageId)
+        {
+            var productImage = await context.ProductImages.FindAsync(imageId);
+            if (productImage == null)
+            {
+                throw new ShopActionException("Doesn't find any picture");
+            }
+            context.ProductImages.Remove(productImage);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateImage(Guid imageId, string caption, bool isDefault)
+        {
+            var productImage = await context.ProductImages.FindAsync(imageId);
+
+            if (productImage == null)
+            {
+                throw new ShopActionException("Doesn't find any image");
+            }
+            productImage.Caption = caption;
+            productImage.IsDefault = isDefault;
+            context.ProductImages.Update(productImage);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<ProductViewModel> GetProductById(Guid id, Guid languageId)
+        {
+            var product = await context.Products.FindAsync(id);
+            var productTranslation = await context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == id && x.LanguageId == languageId);
+            var productViewModel = new ProductViewModel()
+            {
+                Id = product.Id,
+                DateCreated = product.DateCreated,
+                Description = productTranslation.Description,
+                LanguageId = productTranslation.LanguageId.ToString() ?? Guid.Empty.ToString(),
+                Details = productTranslation?.Details,
+                Name = productTranslation?.Name,
+                OriginalPrice = product.OriginalPrice,
+                Price = product.Price,
+                SeoAlias = productTranslation?.SeoAlias,
+                SeoDescription = productTranslation?.SeoDescription,
+                Stock = product.Stock,
+                ViewCount = product.ViewCount
+            };
+            return productViewModel;
+        }
+
         private async Task<string> SaveFile(IFormFile file)
         {
             var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             await storage.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
-        }
-
-        public Task<int> AddImages(int productId, List<IFormFile> files)
-        {
-            //will be implement in future
-            throw new NotImplementedException();
-        }
-
-        public Task<int> RemoveImages(int imageId)
-        {
-            // will be implement in future
-            throw new ShopActionException("Method doesn't init because it isn't important now");
-        }
-
-        public Task<int> UpdateImage(int imageId, string caption, bool isDefault)
-        {
-            // will be implement in future
-            throw new NotImplementedException("Method doesn't init because it isn't important now");
         }
     }
 }
