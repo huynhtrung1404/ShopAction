@@ -20,5 +20,6 @@ namespace ShopAction.ApplicationService.Catalog.Products
         Task<int> RemoveImages(Guid imageId);
         Task<int> UpdateImage(Guid imageId, string caption, bool isDefault);
         Task<ProductViewModel> GetProductById(Guid id, Guid languageId);
+        Task<List<ProductImageViewModel>> GetListImage(Guid productId);
     }
 }

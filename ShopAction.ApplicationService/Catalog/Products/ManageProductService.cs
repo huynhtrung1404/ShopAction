@@ -153,6 +153,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
             var product = await context.Products.FindAsync(productId);
             if (product == null) throw new ShopActionException($"not find product with id: {productId}");
             product.Price = newPrice;
+            context.Products.Update(product);
             return await context.SaveChangesAsync() > 0;
         }
 
@@ -161,6 +162,7 @@ namespace ShopAction.ApplicationService.Catalog.Products
             var product = await context.Products.FindAsync(productId);
             if (product == null) throw new ShopActionException($"not find product with id: {productId}");
             product.Stock += addedQuantity;
+            context.Products.Update(product);
             return await context.SaveChangesAsync() > 0;
         }
 
@@ -253,6 +255,17 @@ namespace ShopAction.ApplicationService.Catalog.Products
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             await storage.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
+        }
+
+        public async Task<List<ProductImageViewModel>> GetListImage(Guid productId)
+        {
+            return await context.ProductImages.Where(x => x.ProductId == productId).Select(i => new ProductImageViewModel
+            {
+                Id = i.Id,
+                FilePath = i.Path,
+                FileSize = i.FileSize,
+                IsDefault = i.IsDefault
+            }).ToListAsync();
         }
     }
 }

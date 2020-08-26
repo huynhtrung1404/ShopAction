@@ -8,11 +8,11 @@ namespace ShopAction.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IPublicProductService publicProductService;
         private readonly IManageProductService manageProductService;
-        public ProductController(IPublicProductService publicProductService,IManageProductService manageProductService)
+        public ProductsController(IPublicProductService publicProductService,IManageProductService manageProductService)
         {
             this.publicProductService = publicProductService;
             this.manageProductService = manageProductService;
@@ -23,10 +23,10 @@ namespace ShopAction.Api.Controllers
             var result = await publicProductService.GetAll();
             return Ok(result);
         }
-        [HttpGet("GetProductById/{id}/{languageId}")]
-        public async Task<IActionResult> GetProductById(Guid id, Guid languageId)
+        [HttpGet("GetProductById/{productId}/{languageId}")]
+        public async Task<IActionResult> GetProductById(Guid productId, Guid languageId)
         {
-            var result = await manageProductService.GetProductById(id,languageId);
+            var result = await manageProductService.GetProductById(productId, languageId);
             if (result == null)
             {
                 return NotFound();
@@ -35,15 +35,19 @@ namespace ShopAction.Api.Controllers
         }
 
         [HttpGet("public-paging")]
-        public async Task<IActionResult> Get([FromQuery]GetPublicProductPagingRequest request)
+        public async Task<IActionResult> Get(Guid languageId,[FromQuery]GetPublicProductPagingRequest request)
         {
-            var products = await publicProductService.GetAllByCategoryId(request);
+            var products = await publicProductService.GetAllByCategoryId(languageId,request);
             return Ok(products);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]ProductCreateRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var result = await manageProductService.Create(request);
             if (result == Guid.Empty)
             {
@@ -65,19 +69,19 @@ namespace ShopAction.Api.Controllers
             return Ok(result);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid productId)
         {
-            var result = await manageProductService.Delete(id);
+            var result = await manageProductService.Delete(productId);
             if (result == 0)
             {
                 return BadRequest();
             }
             return Ok();
         }
-        [HttpPut("price/{id}/{newPrice}")]
-        public async Task<IActionResult> UpdatePrice([FromQuery]Guid id, decimal newPrice)
+        [HttpPatch("{productId}/{newPrice}")]
+        public async Task<IActionResult> UpdatePrice([FromQuery]Guid productId, decimal newPrice)
         {
-            var result = await manageProductService.UpdatePrice(id, newPrice);
+            var result = await manageProductService.UpdatePrice(productId, newPrice);
             if (!result)
             {
                 return BadRequest();
