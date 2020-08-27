@@ -44,12 +44,13 @@ namespace ShopAction.ApplicationService.Catalog.Products
             return data;
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(Guid languageId,GetPublicProductPagingRequest request)
         {
             var query = from p in context.Products
                         join pt in context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in context.ProductInCategories on p.Id equals pic.ProductId
                         join c in context.Categories on pic.CategoryId equals c.Id
+                        where pt.LanguageId == languageId
                         select new { p, pt, pic };
             if (request.CategoryId.HasValue && request.CategoryId.Value != Guid.Empty)
             {
