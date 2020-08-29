@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ShopAction.ApplicationService.Catalog.Products;
 using ShopAction.ApplicationService.Common;
+using ShopAction.ApplicationService.System.Users;
 using ShopAction.Data.Ef;
 using ShopAction.Data.Entities;
 using ShopAction.Utilities.Constants;
@@ -33,6 +34,7 @@ namespace ShopAction.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllers();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
@@ -40,6 +42,7 @@ namespace ShopAction.Api
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>

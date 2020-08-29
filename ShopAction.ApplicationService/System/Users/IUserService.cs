@@ -8,7 +8,7 @@ namespace ShopAction.ApplicationService.System.Users
 {
     public interface IUserService
     {
-        Task<bool> Authenticate(LoginRequest request);
-        Task<bool> register(RegisterRequest request);
+        Task<string> Authenticate(LoginRequest request);
+        Task<bool> Register(RegisterRequest request);
     }
 }
