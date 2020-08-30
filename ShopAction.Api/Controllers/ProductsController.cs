@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAction.ApplicationService.Catalog.Products;
 using ShopAction.ViewModels.Catalog.Products;
@@ -7,6 +8,7 @@ using ShopAction.ViewModels.Catalog.Products;
 namespace ShopAction.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ProductsController : ControllerBase
     {
