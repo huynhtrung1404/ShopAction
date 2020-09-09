@@ -1,21 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -51,21 +45,19 @@ namespace ShopAction.Api
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
-            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
-            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
-                    document.Info.Title = "ToDo API";
-                    document.Info.Description = "A simple ASP.NET Core web API";
-                    document.Info.TermsOfService = "None";
+                    document.Info.Title = "ShopAction API";
+                    document.Info.Description = "A simple and interesting learning asp.net core app";
+                    document.Info.TermsOfService = "It's free now";
                     document.Info.Contact = new NSwag.OpenApiContact
                     {
                         Name = "Trung",
-                        Email = string.Empty,
-                        Url = "https://example.com"
+                        Email = "huynh.trung140495@outlook.com",
+                        Url = string.Empty
                     };
                     document.Info.License = new NSwag.OpenApiLicense
                     {
@@ -78,7 +70,7 @@ namespace ShopAction.Api
                     Type = OpenApiSecuritySchemeType.ApiKey,
                     Name = "Authorization",
                     In = OpenApiSecurityApiKeyLocation.Header,
-                    Description = "Type into the textbox: Bearer {your JWT token}."
+                    Description = "Type Bearer token: Bearer {your JWT token}."
                 });
                 config.OperationProcessors.Add(
                     new AspNetCoreOperationSecurityScopeProcessor("JWT"));
