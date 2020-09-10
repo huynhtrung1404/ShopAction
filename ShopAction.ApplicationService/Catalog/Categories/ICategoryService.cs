@@ -9,7 +9,8 @@ namespace ShopAction.ApplicationService.Catalog.Categories
     public interface ICategoryService
     {
         Task<List<CategoryViewModel>> GetAllCategory();
-        Task<bool> UpdateCategory(Guid id);
+        Task<int> UpdateCategory(UpdateCategoryRequest request);
         Task<bool> DeleteCategory(Guid id);
+        Task<int> AddNewCategory(AddCategoryRequest request);
     }
 }
