@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using ShopAction.Utilities.Exceptions;
 using ShopAction.Data.Enum;
 using ShopAction.Data.Entities;

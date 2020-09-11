@@ -69,6 +69,20 @@ namespace ShopAction.ApplicationService.System.Users
 
             var result = await userManager.CreateAsync(user, request.Password);
             var role = await roleManager.FindByNameAsync("admin");
+            if (role == null)
+            {
+                role = new AppRole
+                {
+                    Name = "admin",
+                    Id = new Guid(),
+                    Description = "Admin"
+                };
+                var userRole =  await roleManager.CreateAsync(role);
+                if (!userRole.Succeeded)
+                {
+                    throw new ShopActionException("Don't find this role to register user");
+                }
+            }
             await userManager.AddToRoleAsync(user, role.Name);
             return result.Succeeded;
         }

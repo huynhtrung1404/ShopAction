@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
+using ShopAction.ApplicationService.Catalog.Categories;
 using ShopAction.ApplicationService.Catalog.Products;
 using ShopAction.ApplicationService.Common;
 using ShopAction.ApplicationService.System.Users;
@@ -45,6 +46,7 @@ namespace ShopAction.Api
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>

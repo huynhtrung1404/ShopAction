@@ -17,7 +17,6 @@ namespace ShopAction.ViewModels.System.User
             RuleFor(x => x.Dob).GreaterThan(DateTime.Now.AddYears(-100)).WithMessage("Birthday cannot greater than 100 years");
             RuleFor(x => x.UserName).NotEmpty().WithMessage("User name is required");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is not empty")
-                .Matches(@"/^(?=.*\d)(?=.*[a - z])(?=.*[A - Z])(?=.*[a - zA - Z]).{ 6,}$")
                 .WithMessage("Password should have digit numeric");
             RuleFor(x => x).Custom((request, context) =>
             {
