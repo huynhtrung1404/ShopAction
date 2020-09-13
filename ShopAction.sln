@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.App", "ShopAction.App\ShopAction.App.csproj", "{000BE792-1198-4AB0-B218-C1816E8FD7DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.App", "src\ShopAction.App\ShopAction.App.csproj", "{000BE792-1198-4AB0-B218-C1816E8FD7DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.Data", "ShopAction.Data\ShopAction.Data.csproj", "{11C83370-2265-45DF-96CF-7A3D62157214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.Data", "src\ShopAction.Data\ShopAction.Data.csproj", "{11C83370-2265-45DF-96CF-7A3D62157214}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.ApplicationService", "ShopAction.ApplicationService\ShopAction.ApplicationService.csproj", "{A244B181-05C6-4A8D-9F64-5E5697A5B81A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.ApplicationService", "src\ShopAction.ApplicationService\ShopAction.ApplicationService.csproj", "{A244B181-05C6-4A8D-9F64-5E5697A5B81A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.Utilities", "ShopAction.Utilities\ShopAction.Utilities.csproj", "{D9054449-E6C1-4CB8-A5DC-D044C2E3268D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.Utilities", "src\ShopAction.Utilities\ShopAction.Utilities.csproj", "{D9054449-E6C1-4CB8-A5DC-D044C2E3268D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.ViewModels", "ShopAction.ViewModels\ShopAction.ViewModels.csproj", "{BEE596A8-5433-4DA1-A90A-E8A38A1BA0AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.ViewModels", "src\ShopAction.ViewModels\ShopAction.ViewModels.csproj", "{BEE596A8-5433-4DA1-A90A-E8A38A1BA0AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.Api", "ShopAction.Api\ShopAction.Api.csproj", "{9321CF32-11AD-4CBD-8272-5816C99A032D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAction.Api", "src\ShopAction.Api\ShopAction.Api.csproj", "{9321CF32-11AD-4CBD-8272-5816C99A032D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F16F7FF7-BDBE-4D4B-8E52-94D94BB7E97E}"
 EndProject
