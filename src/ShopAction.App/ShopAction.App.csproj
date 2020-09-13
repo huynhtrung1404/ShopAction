@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ShopAction.ApplicationService\ShopAction.ApplicationService.csproj" />
     <ProjectReference Include="..\ShopAction.Data\ShopAction.Data.csproj" />
     <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
