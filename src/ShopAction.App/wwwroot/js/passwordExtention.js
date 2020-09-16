@@ -1,4 +1,4 @@
-﻿export class PasswordCheck {
+﻿export default class PasswordCheck {
   static hasMiniumLength(password, minLength) {
     return password.length >= minLength;
   }
@@ -25,8 +25,19 @@
     return format.test(password)
   }
 
-  onlyUnique(value,index,self) {
+  static isValidPassword(password, requireLength, requiredUniqueChars, requireNonAlphanumeric, requireLowercase, requireUppercase, requireDigit) {
+    let self = this
+    if (!self.hasMiniumLength(password, requireLength)) return false;
+    if (!self.hasMiniumUniqueChars(password, requiredUniqueChars)) return false;
+    if (!self.hasSpecialChar(password) && requireNonAlphanumeric) return false;
+    if (!self.hasAnyLowelCase(password) && requireLowercase) return false;
+    if (!self.hasAnyUpperCase(password) && requireUppercase) return false;
+    if (!self.hasDigit(password) && requireDigit) return false;
+    return true;
+  }
+
+  onlyUnique(value, index, self) {
     return self.indexOf(value) === index
   }
 
-}
+};
