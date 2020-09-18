@@ -1,7 +1,4 @@
 ﻿export default class PasswordCheck {
-
-  
-
   static passwordStrength(password) {
     let strength = {
       "Blank": 0,
