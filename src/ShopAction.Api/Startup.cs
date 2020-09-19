@@ -103,6 +103,11 @@ namespace ShopAction.Api
                      IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                  };
              });
+            services.AddCors(o =>
+            {
+                o.AddPolicy("AllowAllOrigin",
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -116,6 +121,7 @@ namespace ShopAction.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("AllowAllOrigin");
 
             app.UseAuthentication();
 
