@@ -26,6 +26,12 @@ namespace ShopAction.ApplicationService.System.Users
             this.roleManager = roleManager;
             this.config = config;
         }
+
+        public Task<bool> AddRole(RoleRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<string> Authenticate(LoginRequest request)
         {
             var user = await userManager.FindByNameAsync(request.UserName);
@@ -53,6 +59,11 @@ namespace ShopAction.ApplicationService.System.Users
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public Task<List<RoleViewModel>> GetAllRoleAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> Register(RegisterRequest request)

@@ -10,5 +10,7 @@ namespace ShopAction.ApplicationService.System.Users
     {
         Task<string> Authenticate(LoginRequest request);
         Task<bool> Register(RegisterRequest request);
+        Task<bool> AddRole(RoleRequest request);
+        Task<List<RoleViewModel>> GetAllRoleAsync();
     }
 }
