@@ -6,3 +6,4 @@ ShopAction is a small project about ecommerce. This app run on ASP.NET Core, a f
 - Entity Framework Core 3
 - MS Sql Server
 - Docker 
+- Angular 10
