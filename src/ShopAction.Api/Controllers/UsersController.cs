@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopAction.ApplicationService.System.Users;
 using ShopAction.Data.Ef;
@@ -55,7 +51,7 @@ namespace ShopAction.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("AddRole")]
+        [HttpPost("AddRole")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> AddNewRole(RoleRequest request)
         {
