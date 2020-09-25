@@ -5,8 +5,8 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY src/ShopAction.Api/ShopAction.Api.csproj ./src/ShopAction.Api/
 COPY src/ShopAction.ViewModels/ShopAction.ViewModels.csproj ./src/ShopAction.ViewModels/
-COPY src/ShopAction.Data/ShopAction.Data.csproj ./src/ShopAction.Data/
 COPY src/ShopAction.Utilities/ShopAction.Utilities.csproj ./src/ShopAction.Utilities/
+COPY src/ShopAction.Data/ShopAction.Data.csproj ./src/ShopAction.Data/
 COPY src/ShopAction.ApplicationService/ShopAction.ApplicationService.csproj ./src/ShopAction.ApplicationService/
 RUN dotnet restore "src/ShopAction.Api/ShopAction.Api.csproj"
 COPY . .
