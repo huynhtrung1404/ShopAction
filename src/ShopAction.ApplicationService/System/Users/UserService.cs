@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ShopAction.Data.Entities;
@@ -7,6 +8,7 @@ using ShopAction.ViewModels.System.User;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,23 @@ namespace ShopAction.ApplicationService.System.Users
             this.roleManager = roleManager;
             this.config = config;
         }
+
+        public async Task<bool> AddRole(RoleRequest request)
+        {
+            var role = await roleManager.FindByNameAsync(request.Name);
+            if (role != null)
+            {
+                throw new ShopActionException("Role is existing and cannot add");
+            }
+            var appRole = new AppRole
+            {
+                Name = request.Name,
+                Description = request.Description,
+            };
+            var result = await roleManager.CreateAsync(appRole);
+            return result.Succeeded;
+        }
+
         public async Task<string> Authenticate(LoginRequest request)
         {
             var user = await userManager.FindByNameAsync(request.UserName);
@@ -53,6 +72,17 @@ namespace ShopAction.ApplicationService.System.Users
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<List<RoleViewModel>> GetAllRoleAsync()
+        {
+            var result = await roleManager.Roles.Select(x => new RoleViewModel
+            {
+                Description = x.Description,
+                Id = x.Id,
+                Name = x.Name
+            }).ToListAsync();
+            return result;
         }
 
         public async Task<bool> Register(RegisterRequest request)

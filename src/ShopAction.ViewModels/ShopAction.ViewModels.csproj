@@ -18,4 +18,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>

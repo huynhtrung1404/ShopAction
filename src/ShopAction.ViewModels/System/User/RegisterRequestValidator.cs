@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using ShopAction.Utilities.Extension;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,8 +17,12 @@ namespace ShopAction.ViewModels.System.User
             RuleFor(x => x).NotNull().WithMessage("Object cannot be null");
             RuleFor(x => x.Dob).GreaterThan(DateTime.Now.AddYears(-100)).WithMessage("Birthday cannot greater than 100 years");
             RuleFor(x => x.UserName).NotEmpty().WithMessage("User name is required");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("Password is not empty")
-                .WithMessage("Password should have digit numeric");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Password is not empty").Custom((request,context) => { 
+                if (!PasswordExtension.IsStrongPassword(request))
+                {
+                    context.AddFailure("Password is weak, please change it");
+                }
+            });
             RuleFor(x => x).Custom((request, context) =>
             {
                 if (!request.Password.Equals(request.ConfirmPassword))
