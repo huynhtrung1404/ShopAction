@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  endpoint : string = 'http://192.168.1.163:5001/api/user';
+  endpoint : string = 'http://192.168.1.163:5001/api/users';
   header = new HttpHeaders().set('Content-Type','application/json');
   currentUser = {};
   constructor(
@@ -20,6 +20,7 @@ export class AuthService {
 
   register(user: RegisterUser):Observable<any>{
     let api = `${this.endpoint}/register`;
+    user.dob = new Date(user.dob);
     return this.http.post(api,user)
     .pipe(catchError(this.handleError))
   }
