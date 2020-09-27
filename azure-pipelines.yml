@@ -1,37 +1,33 @@
 trigger:
-- master
-- develop
-- feature/*
-pool:
-  vmImage: 'ubuntu-18.04'
+  - master
+  - develop
+  - feature/*
+jobs:
+- job: Build_Dotnet
+  pool:
+    vmImage: 'ubuntu-18.04'
 
-variables:
-  solution: '**/src/*.sln'
-  buildConfiguration: 'Release'
+  variables:
+    solution: '**/src/*.sln'
+    buildConfiguration: 'Release'
 
-steps:
-# - task: NuGetToolInstaller@1
-#   displayName: Install nuget
-
-# - task: NuGetCommand@2
-#   inputs:
-#     restoreSolution: '$(solution)'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-  displayName: dotnet build $(buildConfiguration)
-- task: DotNetCoreCLI@2
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: '**/ShopAction.Api.csproj'
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: false
-  displayName: dotnet publish --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: ShopAction
-  displayName: path to publish is $(Build.ArtifactStagingDirectory)
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+    displayName: dotnet build $(buildConfiguration)
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: '**/ShopAction.Api.csproj'
+      arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: false
+    displayName: dotnet publish --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: $(Build.ArtifactStagingDirectory)
+      ArtifactName: ShopAction
+    displayName: path to publish is $(Build.ArtifactStagingDirectory)
