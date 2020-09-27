@@ -29,3 +29,8 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
   displayName: dotnet publish --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: $(Build.ArtifactStagingDirectory)
+    ArtifactName: ShopAction
+  displayName: path to publish is $(Build.ArtifactStagingDirectory)
