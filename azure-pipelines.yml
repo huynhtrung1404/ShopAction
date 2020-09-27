@@ -1,7 +1,9 @@
 trigger:
-  - master
-  - develop
-  - feature/*
+  branches:
+      include:
+      - master
+      - develop
+      - feature/*
 pool:
   vmImage: 'ubuntu-18.04'
 stages:
