@@ -27,4 +27,3 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
   displayName: dotnet build $(buildConfiguration)
-- task:
