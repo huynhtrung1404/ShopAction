@@ -2,11 +2,10 @@ trigger:
   - master
   - develop
   - feature/*
+pool:
+  vmImage: 'ubuntu-18.04'
 jobs:
 - job: Build_Dotnet
-  pool:
-    vmImage: 'ubuntu-18.04'
-
   variables:
     solution: '**/src/*.sln'
     buildConfiguration: 'Release'
