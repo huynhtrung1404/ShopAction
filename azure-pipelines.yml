@@ -31,7 +31,7 @@ steps:
   inputs:
     command: publish
     publishWebProjects: True
-    projects: '**/ShopAction.Api.csproj'
+    projects: '**/*.csproj'
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: false
   displayName: dotnet publish --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)
