@@ -11,7 +11,6 @@ stages:
   jobs:
   - job: Build_Dotnet
     variables:
-      solution: '**/src/*.sln'
       buildConfiguration: 'Release'
 
     steps:
@@ -34,3 +33,19 @@ stages:
         PathtoPublish: $(Build.ArtifactStagingDirectory)
         ArtifactName: ShopAction
       displayName: path to publish is $(Build.ArtifactStagingDirectory)
+- stage: deploy
+  jobs:
+  - deployment: DeployWeb
+    displayName: deploy Web App
+    pool:
+      vmImage: 'Ubuntu-latest'
+    # creates an environment if it doesn't exist
+    environment: 'Ubuntu'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo Hello world
+
+    
+
