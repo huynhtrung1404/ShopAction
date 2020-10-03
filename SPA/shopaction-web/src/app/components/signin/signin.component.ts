@@ -25,6 +25,7 @@ export class SigninComponent implements OnInit {
   }
 
   loginUser() {
+    console.log('run');
     this.authService.login(this.signinForm.value);
   }
 
