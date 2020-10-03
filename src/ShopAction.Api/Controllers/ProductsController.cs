@@ -22,7 +22,7 @@ namespace ShopAction.Api.Controllers
         [HttpGet("GetAllProduct")]
         public async Task<IActionResult> Get()
         {
-            var result = await publicProductService.GetAll();
+            var result =   await publicProductService.GetAll();
             return Ok(result);
         }
         [HttpGet("GetProductById/{productId}/{languageId}")]
