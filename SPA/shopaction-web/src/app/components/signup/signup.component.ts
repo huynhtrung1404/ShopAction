@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {InputModel} from '../../models/InputModel';
+import {IconAlias} from '../constant/icon-alias';
 
 @Component({
   selector: 'app-signup',
@@ -10,6 +12,8 @@ import {Router} from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  iconAlias: IconAlias = new IconAlias();
+  
   constructor(
     public formBuilder: FormBuilder,
     public authService: AuthService,
@@ -37,5 +41,16 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['log-in']);
       }
     })
+  }
+
+  getRegisterUserModel(icon:string, type:string, value: string, placeholder: string, name: string): InputModel {
+    var result: InputModel = {
+      icon : icon,
+      inputType : type,
+      placeHolder : placeholder,
+      value : value,
+      name: name
+    };
+    return result;
   }
 }

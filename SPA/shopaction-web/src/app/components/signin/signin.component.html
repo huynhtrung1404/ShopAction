@@ -1,14 +1,26 @@
-<div class="auth-wrapper">
-    <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
-        <h3 class="h3 mb-3 font-weight-normal text-center">Please sign in</h3>
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" formControlName="userName" placeholder="Enter email" required>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" formControlName="password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-block btn-primary">Sign in</button>
-    </form>
+<div class="auth-wrapper login">
+    <div class="main-agileits">
+        <div class="form-w3agile">
+            <h3 class="h3 font-weight-normal text-center">Please sign in</h3>
+            <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+                <app-input-control 
+                    [inputModel] = "getInput(iconAlias.EMAIL,'text','','Email', 'userName')"
+                    (readEvent) = "getValue($event)"
+                >
+                </app-input-control>
+                <app-input-control 
+                    [inputModel] = "getInput(iconAlias.PASSWORD,'password','','Password', 'password')"
+                    (readEvent) = "getValue($event)"
+                >
+                </app-input-control>
+                <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+                
+            </form>
+        </div>  
+        <div class="forg">
+            <a href="#" class="forg-left">Forgot Password</a>
+            <a href="/sign-up" class="forg-right">Register</a>
+        <div class="clearfix"></div>
+        </div>      
+    </div>
 </div>

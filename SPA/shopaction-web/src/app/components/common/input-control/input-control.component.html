@@ -1,0 +1,12 @@
+<div class="form-group key">
+    <i [ngClass]="inputModel?.icon" aria-hidden="true"></i>
+    <input  [type]="inputModel?.inputType" 
+            class="form-control" 
+            [value]="inputModel?.value" 
+            [placeholder]="inputModel?.placeHolder" 
+            [name]="inputModel?.name"
+            required
+            (change) = "readInput($event)"
+    />
+    <div class="clearfix"></div>
+</div>
