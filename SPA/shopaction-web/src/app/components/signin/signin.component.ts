@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
-import {InputControlComponent} from '../common/input-control/input-control.component';
 import {InputModel} from '../../models/InputModel';
-import { LoginUser } from 'src/app/shared/LoginUser';
+import { LoginUser } from '../../models/LoginUser';
 import { IconAlias } from '../constant/icon-alias';
  
 @Component({
@@ -14,9 +13,9 @@ import { IconAlias } from '../constant/icon-alias';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  _loginUser: LoginUser = new LoginUser();
+  userLogin: LoginUser;
   iconAlias: IconAlias = new IconAlias();
-  constructor(
+  constructor(    
     public formBuilder: FormBuilder,
     public authService: AuthService,
     public router: Router
@@ -31,12 +30,12 @@ export class SigninComponent implements OnInit {
   }
 
   loginUser() {
-    console.log(this._loginUser)
-    this.authService.login(this._loginUser);
+    //console.log(this.userLogin)
+    this.authService.login(this.userLogin);
   }
 
   getInput(icon:string, type:string, value: string, placeholder: string, name: string): InputModel {
-    var result: InputModel = {
+    let result: InputModel = {
       icon : icon,
       inputType : type,
       placeHolder : placeholder,
@@ -47,12 +46,13 @@ export class SigninComponent implements OnInit {
   }
 
   getValue(event){
-    var _name = event.target.name;
-    var _value = event.target.value;
-    if(!_name && _name == "userName") this._loginUser.userName = _value;
-    if(!_name && _name =="password") this._loginUser.password =  _value;
-    debugger;
-    console.log(this._loginUser);
+    console.log(this.userLogin);
+    let _name = event.target.name;
+    let _value = event.target.value;
+    if(!_name && _name == "userName") this.userLogin.userName =  _value;
+    if(!_name && _name =="password") this.userLogin.password =  _value;
+    //debugger;
+    console.log(this.userLogin);
   }
 
 }

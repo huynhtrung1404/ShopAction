@@ -4,6 +4,7 @@ import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {InputModel} from '../../models/InputModel';
 import {IconAlias} from '../constant/icon-alias';
+import { RegisterUser } from 'src/app/shared/RegisterUser';
 
 @Component({
   selector: 'app-signup',
@@ -13,6 +14,7 @@ import {IconAlias} from '../constant/icon-alias';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   iconAlias: IconAlias = new IconAlias();
+  _registerUser: RegisterUser = new RegisterUser();
   
   constructor(
     public formBuilder: FormBuilder,
@@ -53,4 +55,8 @@ export class SignupComponent implements OnInit {
     };
     return result;
   }
+
+  getValue(event){
+    console.log(event.target.value);
+  };
 }

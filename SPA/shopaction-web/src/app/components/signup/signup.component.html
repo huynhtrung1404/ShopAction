@@ -3,7 +3,9 @@
         <div class="form-w3agile">
             <h3 class="h3 font-weight-normal text-center">Please sign up</h3>
             <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="registerUser()">
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.USER, 'text', '', 'First Name', 'firstName')"></app-input-control>
+                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.USER, 'text', '', 'First Name', 'firstName')"
+                                (readEvent) = "getValue($event)"
+                ></app-input-control>
                 
                 <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.USER, 'text', '', 'Last Name', 'lastName')"></app-input-control>
                 

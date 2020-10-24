@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {RegisterUser} from '../RegisterUser';
-import {LoginUser} from '../LoginUser';
+import {LoginUser} from '../../models/LoginUser';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';

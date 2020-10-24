@@ -10,6 +10,7 @@ export class InputControlComponent implements OnInit {
   @Input() inputModel : InputModel;
   @Output() readEvent = new EventEmitter();
   readInput(event){
+    // debugger
     this.inputModel.value = event.target.value;
     this.readEvent.emit(event);
   }
