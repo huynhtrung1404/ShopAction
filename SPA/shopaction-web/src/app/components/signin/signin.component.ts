@@ -13,8 +13,12 @@ import { IconAlias } from '../constant/icon-alias';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  userLogin: LoginUser;
+  userLogin: LoginUser = new LoginUser();
   iconAlias: IconAlias = new IconAlias();
+  loginError =  {
+    userName: "",
+    password: ""
+  };
   constructor(    
     public formBuilder: FormBuilder,
     public authService: AuthService,
@@ -30,8 +34,9 @@ export class SigninComponent implements OnInit {
   }
 
   loginUser() {
-    //console.log(this.userLogin)
-    this.authService.login(this.userLogin);
+    //console.log(this.userLogin);
+    let isFormValid = this.loginFormValidation();
+    if(isFormValid) this.authService.login(this.userLogin);
   }
 
   getInput(icon:string, type:string, value: string, placeholder: string, name: string): InputModel {
@@ -45,14 +50,38 @@ export class SigninComponent implements OnInit {
     return result;
   }
 
-  getValue(event){
-    console.log(this.userLogin);
-    let _name = event.target.name;
-    let _value = event.target.value;
-    if(!_name && _name == "userName") this.userLogin.userName =  _value;
-    if(!_name && _name =="password") this.userLogin.password =  _value;
-    //debugger;
-    console.log(this.userLogin);
+  getUserNameValue(event){
+    if(!!event.target.value){
+      this.loginError.userName = '';
+      this.userLogin.userName = event.target.value;
+    }
+    else {
+      this.loginError.userName = 'Username is required!'; 
+    }
+  }
+
+  getPasswordValue(event){
+    if(!!event.target.value){
+      this.loginError.password = ''; 
+      this.userLogin.password = event.target.value;
+    }
+    else {
+      this.loginError.password = 'Password is required!'; 
+    }
+  }
+
+  loginFormValidation(){
+    let valid = false;
+    if(!this.userLogin.userName){
+      this.loginError.userName = 'Username is required!';
+    }
+    if(!this.userLogin.password){
+      this.loginError.password = 'Password is required!';
+    }
+    if(this.userLogin.userName && this.userLogin.password){
+      valid = true;
+    }
+    return valid;
   }
 
 }

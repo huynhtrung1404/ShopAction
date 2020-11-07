@@ -8,15 +8,19 @@ import {InputModel} from '../../../models/InputModel';
 })
 export class InputControlComponent implements OnInit {
   @Input() inputModel : InputModel;
+  @Input() hasError: boolean;
   @Output() readEvent = new EventEmitter();
   readInput(event){
-    // debugger
+    //debugger
     this.inputModel.value = event.target.value;
+    let aa = this.hasError;
     this.readEvent.emit(event);
   }
   
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
 }

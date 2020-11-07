@@ -1,28 +1,116 @@
 <div class="auth-wrapper login">
-    <div class="main-agileits">
-        <div class="form-w3agile">
-            <h3 class="h3 font-weight-normal text-center">Please sign up</h3>
-            <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="registerUser()">
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.USER, 'text', '', 'First Name', 'firstName')"
-                                (readEvent) = "getValue($event)"
-                ></app-input-control>
-                
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.USER, 'text', '', 'Last Name', 'lastName')"></app-input-control>
-                
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.CALENDAR, 'date', '', 'Date of birth', 'dob')"></app-input-control>
-                
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.EMAIL, 'text', '', 'Email', 'email')"></app-input-control>
+  <div class="main-agileits">
+    <div class="form-w3agile">
+      <h3 class="h3 font-weight-normal text-center">Please sign up</h3>
+      <form class="form-signin">
+        <div class="hasError" *ngIf = "registerError.firstName">{{registerError.firstName}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.USER,
+              'text',
+              '',
+              'First Name',
+              'firstName'
+            )
+          "
+          (readEvent)="getFirstName($event)"
+        ></app-input-control>
 
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.PHONE, 'text', '', 'Phone Number', 'phoneNumber')"></app-input-control>
-                
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.USER, 'text', '', 'User Name', 'userName')"></app-input-control>
-                
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.PASSWORD, 'password', '', 'Password', 'password')"></app-input-control>
-                
-                <app-input-control [inputModel] = "getRegisterUserModel(iconAlias.PASSWORD, 'password', '', 'Confirm Password', 'confirmPassword')"></app-input-control>
-                
-                <button type="submit" class="btn btn-block btn-primary">Sign up</button>
-            </form>
-        </div>
+        <div class="hasError" *ngIf = "registerError.lastName">{{registerError.lastName}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.USER,
+              'text',
+              '',
+              'Last Name',
+              'lastName'
+            )
+          "
+          (readEvent)="getLastName($event)"
+        ></app-input-control>
+
+        <div class="hasError" *ngIf = "registerError.dob">{{registerError.dob}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.CALENDAR,
+              'date',
+              '',
+              'Date of birth',
+              'dob'
+            )
+          "
+          (readEvent)="getDoB($event)"
+        ></app-input-control>
+
+        <div class="hasError" *ngIf = "registerError.email">{{registerError.email}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(iconAlias.EMAIL, 'text', '', 'Email', 'email')
+          "
+          (readEvent)="getEmail($event)"
+        ></app-input-control>
+
+        <div class="hasError" *ngIf = "registerError.phoneNumber">{{registerError.phoneNumber}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.PHONE,
+              'text',
+              '',
+              'Phone Number',
+              'phoneNumber'
+            )
+          "
+          (readEvent)="getPhoneNumber($event)"
+        ></app-input-control>
+
+        <div class="hasError" *ngIf = "registerError.userName">{{registerError.userName}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.USER,
+              'text',
+              '',
+              'User Name',
+              'userName'
+            )
+          "
+          (readEvent)="getUserName($event)"
+        ></app-input-control>
+
+        <div class="hasError" *ngIf = "registerError.password">{{registerError.password}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.PASSWORD,
+              'password',
+              '',
+              'Password',
+              'password'
+            )
+          "
+          (readEvent)="getPassword($event)"
+        ></app-input-control>
+
+        <div class="hasError" *ngIf = "registerError.confirmPassword">{{registerError.confirmPassword}}</div>
+        <app-input-control
+          [inputModel]="
+            getRegisterUserModel(
+              iconAlias.PASSWORD,
+              'password',
+              '',
+              'Confirm Password',
+              'confirmPassword'
+            )
+          "
+          (readEvent)="getConfirmPassword($event)"
+        ></app-input-control>
+
+        <button type="submit" class="btn btn-block btn-primary" (click)="registerUser()">Sign up</button>
+      </form>
     </div>
+  </div>
 </div>

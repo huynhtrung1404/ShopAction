@@ -2,18 +2,21 @@
     <div class="main-agileits">
         <div class="form-w3agile">
             <h3 class="h3 font-weight-normal text-center">Please sign in</h3>
-            <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+            <form class="form-signin">
+                <div class="hasError" *ngIf = "loginError.userName">{{loginError.userName}}</div>
                 <app-input-control 
                     [inputModel] = "getInput(iconAlias.EMAIL,'text','','Email', 'userName')"
-                    (readEvent) = "getValue($event)"
+                    [hasError] = "!!loginError.userName"
+                    (readEvent) = "getUserNameValue($event)"
                 >
                 </app-input-control>
+                <div class="hasError" *ngIf = "loginError.password">{{loginError.password}}</div>
                 <app-input-control 
                     [inputModel] = "getInput(iconAlias.PASSWORD,'password','','Password', 'password')"
-                    (readEvent) = "getValue($event)"
+                    (readEvent) = "getPasswordValue($event)"
                 >
                 </app-input-control>
-                <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-block btn-primary" (click)="loginUser()">Sign in</button>
                 
             </form>
         </div>  
