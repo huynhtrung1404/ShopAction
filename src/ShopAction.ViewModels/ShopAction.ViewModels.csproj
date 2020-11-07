@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Catalog\Products\Manage\**" />
+    <Compile Remove="Catalog\Products\Public\**" />
+    <EmbeddedResource Remove="Catalog\Products\Manage\**" />
+    <EmbeddedResource Remove="Catalog\Products\Public\**" />
+    <None Remove="Catalog\Products\Manage\**" />
+    <None Remove="Catalog\Products\Public\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

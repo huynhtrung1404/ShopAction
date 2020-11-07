@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>18b297fa-4c38-4a91-b647-619b174ba21b</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopAction.ApplicationService\ShopAction.ApplicationService.csproj" />
+    <ProjectReference Include="..\ShopAction.Data\ShopAction.Data.csproj" />
+    <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
+    <ProjectReference Include="..\ShopAction.ViewModels\ShopAction.ViewModels.csproj" />
+  </ItemGroup>
+
+
+</Project>

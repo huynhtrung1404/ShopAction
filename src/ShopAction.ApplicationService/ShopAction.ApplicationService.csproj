@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.7.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopAction.Data\ShopAction.Data.csproj" />
+    <ProjectReference Include="..\ShopAction.Utilities\ShopAction.Utilities.csproj" />
+    <ProjectReference Include="..\ShopAction.ViewModels\ShopAction.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
