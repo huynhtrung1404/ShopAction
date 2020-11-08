@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using ShopAction.Application.Models;
 
-namespace ShopAction.Application.IIdentityService
+namespace ShopAction.Application.Common.Interface
 {
     public interface IIdentityService
     {

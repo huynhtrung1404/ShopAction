@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using ShopAction.Application.IIdentityService;
+using ShopAction.Application.Common.Interface;
 using ShopAction.Application.Models;
 
 namespace ShopAction.Infrastructure.Identity
