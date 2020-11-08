@@ -16,5 +16,9 @@
     <ProjectReference Include="..\ShopAction.Infrastructure\ShopAction.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 
 </Project>
