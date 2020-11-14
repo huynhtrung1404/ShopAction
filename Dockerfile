@@ -3,20 +3,19 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY src/ShopAction.Api/ShopAction.Api.csproj ./src/ShopAction.Api/
-COPY src/ShopAction.ViewModels/ShopAction.ViewModels.csproj ./src/ShopAction.ViewModels/
-COPY src/ShopAction.Utilities/ShopAction.Utilities.csproj ./src/ShopAction.Utilities/
-COPY src/ShopAction.Data/ShopAction.Data.csproj ./src/ShopAction.Data/
-COPY src/ShopAction.ApplicationService/ShopAction.ApplicationService.csproj ./src/ShopAction.ApplicationService/
-RUN dotnet restore "src/ShopAction.Api/ShopAction.Api.csproj"
+COPY src/ShopAction.Web/*.csproj ./src/ShopAction.Web/
+COPY src/ShopAction.Application/*.csproj ./src/ShopAction.Application/
+COPY src/ShopAction.Infrastructure/*.csproj ./src/ShopAction.Infrastructure/
+COPY src/ShopAction.Domain/*.csproj ./src/ShopAction.Domain/
+RUN dotnet restore "src/ShopAction.Web/ShopAction.Web.csproj"
 COPY . .
-WORKDIR "/src/src/ShopAction.Api"
-RUN dotnet build "ShopAction.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/src/ShopAction.Web"
+RUN dotnet build "ShopAction.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ShopAction.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "ShopAction.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ShopAction.Api.dll"]
+ENTRYPOINT ["dotnet", "ShopAction.Web.dll"]
