@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ShopAction.Domain.Entities.Base;
 
 namespace ShopAction.Domain.Entities
 {
-    public class Cart
+    public class Cart : BaseEntity
     {
         public Guid ProductId { get; set; }
         public int Quantity { get; set; }
