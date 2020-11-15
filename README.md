@@ -10,6 +10,8 @@ ShopAction is my first project to learn ASP.Net Core, docker, podman, Vuejs and 
 - Podman (working with Fedora distro)
 - Docker (using on windows 10)
 - Angular 10
+- MediatR
+- AutoMapper
 ## Overview
 
 ### Domain

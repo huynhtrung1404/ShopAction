@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopAction.Application;
 using ShopAction.Infrastructure;
 
 namespace ShopAction.Web
@@ -21,6 +22,7 @@ namespace ShopAction.Web
         {
             services.AddControllers();
             services.AddInfrastructure(Configuration);
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
