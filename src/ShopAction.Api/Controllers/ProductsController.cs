@@ -8,7 +8,7 @@ using ShopAction.ViewModels.Catalog.Products;
 namespace ShopAction.Api.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
     public class ProductsController : ControllerBase
     {

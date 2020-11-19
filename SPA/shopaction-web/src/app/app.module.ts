@@ -10,6 +10,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { InputControlComponent } from './components/common/input-control/input-control.component';
+import { CarouselSliderComponent } from './components/common/carousel-slider/carousel-slider.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InputControlComponent } from './components/common/input-control/input-c
     SigninComponent,
     SignupComponent,
     UserProfileComponent,
-    InputControlComponent
+    InputControlComponent,
+    CarouselSliderComponent
   ],
   imports: [
     BrowserModule,
