@@ -27,9 +27,10 @@ namespace ShopAction.Infrastructure.Identity.Models
         public DbSet<ProductInCategory> ProductInCategories { get ; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
 
-        public Task<int> SaveChangeAsync(CancellationToken cancellationToken)
+        public async Task<int> SaveChangeAsync(CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var result = await base.SaveChangesAsync(cancellationToken);
+            return result;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
