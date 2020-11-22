@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ShopAction.Application.Features.Products.Commands;
 using ShopAction.Application.Features.Products.Queries;
 using ShopAction.Web.Controllers.Base;
 
@@ -24,9 +25,11 @@ namespace ShopAction.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add()
+        [Route("AddProduct")]
+        public async Task<IActionResult> Add(AddProductCommand command)
         {
-            return Ok();
+            command.Id = Guid.NewGuid();
+            return Ok(await Mediator.Send(command));
         }
     }
 }
