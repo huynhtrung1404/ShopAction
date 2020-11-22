@@ -31,5 +31,12 @@ namespace ShopAction.Web.Controllers
             command.Id = Guid.NewGuid();
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpPost]
+        [Route("AddProductImage")]
+        public async Task<IActionResult> AddImage([FromForm]UploadProductImageCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
     }
 }
