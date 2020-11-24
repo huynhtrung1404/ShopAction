@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ShopAction.Application.Features.Products.Commands
 {
@@ -14,8 +16,11 @@ namespace ShopAction.Application.Features.Products.Commands
         public int Stock { get; set; }
     }
 
-    public class EditProductCommandHandler :IRequestHandler<EditProductCommand, bool>
+    public class EditProductCommandHandler : IRequestHandler<EditProductCommand, bool>
     {
-
+        public Task<bool> Handle(EditProductCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
