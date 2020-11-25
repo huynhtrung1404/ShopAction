@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ShopAction.Application.Features.Products.Commands;
 using ShopAction.Application.Features.Products.Queries;
@@ -36,6 +35,12 @@ namespace ShopAction.Web.Controllers
         [HttpPost]
         [Route("AddProductImage")]
         public async Task<IActionResult> AddImage([FromForm]UploadProductImageCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+        [HttpPut]
+        [Route("UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct([FromBody]EditProductCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
