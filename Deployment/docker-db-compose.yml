@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  local-db:
+    image: "mcr.microsoft.com/mssql/server"
+    ports:
+      - "14333:1433"
+    environment:
+      SA_PASSWORD: "P@ssw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - type: volume
+        source: mssql-server-linux-data
+        target: /var/opt/mssql
+    restart: on-failure
+volumes:
+  mssql-server-linux-data:

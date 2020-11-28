@@ -5,26 +5,10 @@ services:
     build:
       context: ../../ShopAction
       dockerfile: Dockerfile
-    depends_on:
-      - db
     ports:
       - 5001:5001
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings:ShopAction=Server=192.168.1.163,14333;Database=ShopActionDb;MultipleActiveResultSets=true;User ID=sa;Password=P@ssw0rd
+      - ConnectionStrings:DefaultConnection=Server=192.168.1.166,14333;Database=CleanArchitectureDb;MultipleActiveResultSets=true;User ID=sa;Password=P@ssw0rd
       - ASPNETCORE_URLS=http://+:5001
     restart: on-failure
-  db:
-    image: "mcr.microsoft.com/mssql/server"
-    ports:
-      - "14333:1433"
-    environment:
-      SA_PASSWORD: "P@ssw0rd"
-      ACCEPT_EULA: "Y"
-    volumes:
-      - type: volume
-        source: mssql-server-linux-data
-        target: /var/opt/mssql
-    restart: on-failure
-volumes:
-    mssql-server-linux-data:
