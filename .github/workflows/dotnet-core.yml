@@ -20,4 +20,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: publish
-      run: dotnet publish -c release -0 ./ShopAction.Web
+      run: dotnet publish -c release -0 ShopAction.Web
