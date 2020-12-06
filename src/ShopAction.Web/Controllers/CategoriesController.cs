@@ -27,5 +27,12 @@ namespace ShopAction.Web.Controllers
         {
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpPut]
+        [Route("UpdateCategory")]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
     }
 }
