@@ -58,7 +58,7 @@ namespace ShopAction.Application.Features.Products.Commands
             });
 
             var result = await _context.SaveChangeAsync(cancellationToken);
-            return result.Equals(0);
+            return result == 1;
         }
     }
 }

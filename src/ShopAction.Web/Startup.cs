@@ -38,6 +38,7 @@ namespace ShopAction.Web
                        };
                    }
                );
+            services.AddCors(x => x.AddPolicy("EnableCors", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +54,7 @@ namespace ShopAction.Web
             app.UseSwaggerUi3();
 
             app.UseRouting();
+            app.UseCors("EnableCors");
 
             app.UseAuthorization();
 

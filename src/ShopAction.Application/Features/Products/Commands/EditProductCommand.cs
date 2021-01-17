@@ -38,9 +38,9 @@ namespace ShopAction.Application.Features.Products.Commands
             product.Price = request.Price;
             product.Stock = request.Stock;
             productName.Name = request.Name;
-            await _context.SaveChangeAsync(cancellationToken);
+            var result = await _context.SaveChangeAsync(cancellationToken);
 
-            return true;
+            return result ==1;
 
         }
     }
