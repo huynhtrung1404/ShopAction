@@ -12,3 +12,11 @@ services:
       - ConnectionStrings:DefaultConnection=Server=192.168.1.166,14333;Database=CleanArchitectureDb;MultipleActiveResultSets=true;User ID=sa;Password=P@ssw0rd
       - ASPNETCORE_URLS=http://+:5001
     restart: on-failure
+  web-client:
+    image: shopaction-frontend
+    build:
+      context: ../../ShopAction/src/ShopAction.FrontEnd
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+    restart: on-failure
