@@ -7,8 +7,7 @@ ShopAction is my first project to learn ASP.Net Core, docker, podman, Vuejs and 
 - ASP.Net Core 3.1 (ASP.Net Core 5.0 is comming soon)
 - Microsoft SQL Server (MariaDb is comming soon)
 - VueJs 3
-- Podman (working with Fedora distro)
-- Docker (using on windows 10)
+- Docker
 - Angular 10
 - MediatR
 - AutoMapper
