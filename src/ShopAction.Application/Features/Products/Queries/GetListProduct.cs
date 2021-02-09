@@ -17,6 +17,7 @@ namespace ShopAction.Application.Features.Products.Queries
     public class ProductQueryHandler : IRequestHandler<GetListProduct, IList<ProductDto>>
     {
         private readonly IApplicationDbContext _context;
+
         public ProductQueryHandler(IApplicationDbContext context)
         {
             _context = context;
@@ -24,20 +25,20 @@ namespace ShopAction.Application.Features.Products.Queries
         public async Task<IList<ProductDto>> Handle(GetListProduct request, CancellationToken cancellationToken)
         {
             var result = from p in await _context.Products.ToListAsync()
-                            join l in _context.ProductTranslations on p.Id equals l.ProductId
-                            join ca in _context.ProductInCategories on p.Id equals ca.ProductId
-                            join c in _context.Categories on ca.CategoryId equals c.Id
-                            join lang in _context.Languages on l.LanguageId equals lang.Id 
-                            select new ProductDto {
-                                Id = p.Id,
-                                DateTime = DateTime.Now.ToString(),
-                                Description = l.Description,
-                                Language = lang.Name,
-                                Name = l.Name,
-                                Category = c.Id.ToString()
-                            };
+                         join l in _context.ProductTranslations on p.Id equals l.ProductId
+                         join ca in _context.ProductInCategories on p.Id equals ca.ProductId
+                         join c in _context.Categories on ca.CategoryId equals c.Id
+                         join lang in _context.Languages on l.LanguageId equals lang.Id
+                         select new ProductDto
+                         {
+                             Id = p.Id,
+                             DateTime = DateTime.Now.ToString(),
+                             Description = l.Description,
+                             Language = lang.Name,
+                             Name = l.Name,
+                             Category = c.Id.ToString()
+                         };
             return result.ToList();
-
         }
     }
 }

@@ -18,5 +18,9 @@ namespace ShopAction.Domain.Entities
         public List<OrderDetail> OrderDetails { get; set; }
         public List<ProductTranslation> ProductTranslations { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+        public Product()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

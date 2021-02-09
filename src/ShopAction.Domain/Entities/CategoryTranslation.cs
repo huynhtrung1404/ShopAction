@@ -15,5 +15,9 @@ namespace ShopAction.Domain.Entities
         public string SeoAlias { get; set; }
         public Category Category { get; set; }
         public Language Language { get; set; }
+        public CategoryTranslation()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

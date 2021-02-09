@@ -52,7 +52,6 @@ namespace ShopAction.Web
             app.UseHttpsRedirection();
             app.UseOpenApi();
             app.UseSwaggerUi3();
-
             app.UseRouting();
             app.UseCors("EnableCors");
 
