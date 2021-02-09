@@ -99,7 +99,7 @@ namespace ShopAction.Infrastructure.Persistence
                     new ProductTranslation()
                     {
                         Id = Guid.NewGuid(),
-                        ProductId = products[1].Id,
+                        ProductId = products[2].Id,
                         SeoTitle = "ao-mau-3",
                         SeoAlias = "Ao Mau",
                         SeoDescription = "Sản phẩm",
@@ -144,7 +144,7 @@ namespace ShopAction.Infrastructure.Persistence
                       new ProductInCategory()
                       {
                            CategoryId = categories[1].Id,
-                           ProductId = products[1].Id
+                           ProductId = products[2].Id
                       }
                 };
 
