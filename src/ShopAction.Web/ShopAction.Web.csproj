@@ -8,15 +8,15 @@
         <NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NSwag.AspNetCore" Version="13.9.4" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.10.2" />
   </ItemGroup>
 
   <ItemGroup>
