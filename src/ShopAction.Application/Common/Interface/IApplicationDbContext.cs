@@ -25,6 +25,8 @@ namespace ShopAction.Application.Common.Interface
         DbSet<ProductInCategory> ProductInCategories { get; set; }
         DbSet<ProductImage> ProductImages { get; set; }
 
-        Task<int> SaveChangeAsync(CancellationToken cancellationToken);
+        Task<int> SaveChangeAsync(CancellationToken cancellationToken = new CancellationToken());
+        DbSet<T> Set<T>() where T:class;
+        void Dispose();
     }
 }

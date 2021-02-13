@@ -10,35 +10,37 @@ using ShopAction.Application.Features.Products.Queries.Dtos;
 
 namespace ShopAction.Application.Features.Products.Queries
 {
-    public class GetListProduct : IRequest<IList<ProductDto>>
+    public class GetListProduct : IRequest<IQueryable<ProductDto>>
     {
 
     }
-    public class ProductQueryHandler : IRequestHandler<GetListProduct, IList<ProductDto>>
+    public class ProductQueryHandler : IRequestHandler<GetListProduct, IQueryable<ProductDto>>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IUnitOfWork unitOfWork;
 
-        public ProductQueryHandler(IApplicationDbContext context)
+        public ProductQueryHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            this.unitOfWork = unitOfWork;
         }
-        public async Task<IList<ProductDto>> Handle(GetListProduct request, CancellationToken cancellationToken)
+        public async Task<IQueryable<ProductDto>> Handle(GetListProduct request, CancellationToken cancellationToken)
         {
-            var result = from p in await _context.Products.ToListAsync()
-                         join l in _context.ProductTranslations on p.Id equals l.ProductId
-                         join ca in _context.ProductInCategories on p.Id equals ca.ProductId
-                         join c in _context.Categories on ca.CategoryId equals c.Id
-                         join lang in _context.Languages on l.LanguageId equals lang.Id
-                         select new ProductDto
-                         {
-                             Id = p.Id,
-                             DateTime = DateTime.Now.ToString(),
-                             Description = l.Description,
-                             Language = lang.Name,
-                             Name = l.Name,
-                             Category = c.Id.ToString()
-                         };
-            return result.ToList();
+            var result = await Task.Run(() => from p in unitOfWork.ProductRepo.GetAllData()
+                                              join l in unitOfWork.ProductTranslationRepo.GetAllData() on p.Id equals l.ProductId
+                                              join ca in unitOfWork.ProductInCategoryRepo.GetAllData() on p.Id equals ca.ProductId
+                                              join c in unitOfWork.CategoryRepo.GetAllData() on ca.CategoryId equals c.Id
+                                              join lang in unitOfWork.LanguageRepo.GetAllData() on l.LanguageId equals lang.Id
+                                              join cat in unitOfWork.CategoryTranslationRepo.GetAllData() on c.Id equals cat.CategoryId
+                                              select new ProductDto
+                                              {
+                                                  Id = p.Id,
+                                                  DateTime = DateTime.Now.ToString(),
+                                                  Description = l.Description,
+                                                  Language = lang.Name,
+                                                  Name = l.Name,
+                                                  Category = cat.Name
+                                              });
+            return result;
         }
+
     }
 }

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\ShopAction.Domain\ShopAction.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Interface\Repositories\" />
+    <Folder Include="Common\Repositories\" />
+  </ItemGroup>
 </Project>
