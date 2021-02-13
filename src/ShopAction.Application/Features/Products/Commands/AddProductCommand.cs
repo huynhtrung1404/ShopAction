@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopAction.Application.Features.Products.Commands
 {
-    public class AddProductCommand : IRequest<bool>
+    public class AddProductCommand : IRequest<int>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -24,16 +24,16 @@ namespace ShopAction.Application.Features.Products.Commands
         public Guid Language { get; set; }
     }
 
-    public class AddProductCommandHandler : IRequestHandler<AddProductCommand, bool>
+    public class AddProductCommandHandler : IRequestHandler<AddProductCommand, int>
     {
-        private readonly IApplicationDbContext _context;
-        public AddProductCommandHandler(IApplicationDbContext context)
+        private readonly IUnitOfWork unitOfWork;
+        public AddProductCommandHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            this.unitOfWork = unitOfWork;
         }
-        public async Task<bool> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
-            await _context.Products.AddAsync(new Product
+            await unitOfWork.ProductRepo.AddAsync(new Product
             {
                 Id = request.Id,
                 Price = request.Price,
@@ -41,7 +41,7 @@ namespace ShopAction.Application.Features.Products.Commands
                 OriginalPrice = request.Price,
                 Stock = request.Stock
             });
-            await _context.ProductTranslations.AddAsync(new ProductTranslation
+            await unitOfWork.ProductTranslationRepo.AddAsync(new ProductTranslation
             {
                 Description = request.Description,
                 ProductId = request.Id,
@@ -51,14 +51,14 @@ namespace ShopAction.Application.Features.Products.Commands
                 Id = Guid.NewGuid()
             });
 
-            await _context.ProductInCategories.AddAsync(new ProductInCategory
+            await unitOfWork.ProductInCategoryRepo.AddAsync(new ProductInCategory
             {
                 CategoryId = request.CategoryId,
                 ProductId = request.Id
             });
 
-            var result = await _context.SaveChangeAsync(cancellationToken);
-            return result == 1;
+            return await unitOfWork.Completed();
+
         }
     }
 }

@@ -9,31 +9,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ShopAction.Application.Features.Categories.Queries
 {
-    public class GetAllCategoryQuery :IRequest<IList<CategoryDto>>
+    public class GetAllCategoryQuery : IRequest<IQueryable<CategoryDto>>
     {
     }
 
-    public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQuery, IList<CategoryDto>>
+    public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQuery, IQueryable<CategoryDto>>
     {
-        private readonly IApplicationDbContext _context;
-        public GetAllCategoryQueryHandler(IApplicationDbContext context)
+        private readonly IUnitOfWork unitOfWork;
+        public GetAllCategoryQueryHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            this.unitOfWork = unitOfWork;
         }
-        public async Task<IList<CategoryDto>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
+        public async Task<IQueryable<CategoryDto>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
         {
-            var result = from c in _context.Categories
-                         join ci in _context.CategoryTranslations on c.Id equals ci.CategoryId
-                         join lang in _context.Languages on ci.LanguageId equals lang.Id
-                         select new CategoryDto
-                         {
-                             Id = c.Id.ToString(),
-                             Description = ci.SeoDescription,
-                             Language = lang.Name,
-                             IsShowOnHome = c.IsShowOnHome,
-                             Name = ci.Name
-                         };
-            return await result.ToListAsync();
+            var result = await Task.Run(() => from c in unitOfWork.CategoryRepo.GetAllData()
+                                              join ci in unitOfWork.CategoryTranslationRepo.GetAllData() on c.Id equals ci.CategoryId
+                                              join lang in unitOfWork.LanguageRepo.GetAllData() on ci.LanguageId equals lang.Id
+                                              select new CategoryDto
+                                              {
+                                                  Id = c.Id.ToString(),
+                                                  Description = ci.SeoDescription,
+                                                  Language = lang.Name,
+                                                  IsShowOnHome = c.IsShowOnHome,
+                                                  Name = ci.Name
+                                              });
+            return result;
 
         }
     }

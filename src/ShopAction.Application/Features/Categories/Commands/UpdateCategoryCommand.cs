@@ -5,12 +5,13 @@ using ShopAction.Application.Common.Interface;
 using ShopAction.Domain.Entities;
 using ShopAction.Domain.Enum;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShopAction.Application.Features.Categories.Commands
 {
-    public class UpdateCategoryCommand: IRequest<bool>
+    public class UpdateCategoryCommand : IRequest<int>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -19,18 +20,18 @@ namespace ShopAction.Application.Features.Categories.Commands
 
     }
 
-    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, bool>
+    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, int>
     {
-        private readonly IApplicationDbContext _context;
-        public UpdateCategoryCommandHandler(IApplicationDbContext context)
+        private readonly IUnitOfWork unitOfWork;
+        public UpdateCategoryCommandHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            this.unitOfWork = unitOfWork;
         }
-        public async Task<bool> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var info = await _context.Categories.FindAsync(request.Id);
-            var infoName = await _context.CategoryTranslations.FirstOrDefaultAsync(x => x.CategoryId == request.Id);
-            if (info == null)
+            var info = unitOfWork.CategoryRepo.Find(x => x.Id == request.Id).FirstOrDefault();
+            var infoName = unitOfWork.CategoryTranslationRepo.Find(x => x.CategoryId == request.Id).FirstOrDefault();
+            if (info == null || infoName == null)
             {
                 throw new NotFoundException("Category doesn't exist");
             }
@@ -39,10 +40,10 @@ namespace ShopAction.Application.Features.Categories.Commands
             info.Status = request.Status == 1 ? Status.Active : Status.InActive;
             infoName.Name = request.Name;
 
-            var result = await _context.SaveChangeAsync(cancellationToken);
+            var result = await unitOfWork.Completed();
 
-            return result == 1;
-           
+            return result;
+
         }
     }
 }
