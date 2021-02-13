@@ -17,5 +17,9 @@ namespace ShopAction.Domain.Entities
         public string ProductCategoryIds { get; set; }
         public Status Status { get; set; }
         public string Name { get; set; }
+        public Promotion()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

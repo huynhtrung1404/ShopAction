@@ -17,5 +17,9 @@ namespace ShopAction.Domain.Entities
         public Guid LanguageId { set; get; }
         public Product Product { get; set; }
         public Language Language { get; set; }
+        public ProductTranslation()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

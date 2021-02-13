@@ -17,5 +17,9 @@ namespace ShopAction.Domain.Entities
         public TransactionStatus Status { get; set; }
         public string Provider { get; set; }
         public Guid UserId { get; set; }
+        public Transaction()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

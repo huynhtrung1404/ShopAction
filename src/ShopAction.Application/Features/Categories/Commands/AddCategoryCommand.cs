@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShopAction.Application.Features.Categories.Commands
 {
-    public class AddCategoryCommand : IRequest<bool>
+    public class AddCategoryCommand : IRequest<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,36 +18,33 @@ namespace ShopAction.Application.Features.Categories.Commands
         public Guid LanguageId { get; set; }
     }
 
-    public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, bool>
+    public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, int>
     {
-        private readonly IApplicationDbContext _context;
-        public AddCategoryCommandHandler(IApplicationDbContext context)
+        private readonly IUnitOfWork unitOfWork;
+        public AddCategoryCommandHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            this.unitOfWork = unitOfWork;
         }
-        public async Task<bool> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
-            var categoryId = Guid.NewGuid();
-            await _context.Categories.AddAsync(new Category
+            await unitOfWork.CategoryRepo.AddAsync(new Category
             {
-                Id = categoryId,
                 Status = Status.Active,
                 SortOrder = 1,
                 IsShowOnHome = request.IsShowOnHome
             });
 
-            await _context.CategoryTranslations.AddAsync(new CategoryTranslation
+            await unitOfWork.CategoryTranslationRepo.AddAsync(new CategoryTranslation
             {
-                CategoryId = categoryId,
                 Id = Guid.NewGuid(),
                 LanguageId = request.LanguageId,
                 SeoDescription = request.Description,
                 Name = request.Name
             });
 
-            var result = await _context.SaveChangeAsync(cancellationToken);
+            var result = await unitOfWork.Completed();
 
-            return result == 1;
+            return result;
         }
     }
 }

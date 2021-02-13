@@ -12,5 +12,9 @@ namespace ShopAction.Domain.Entities
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public Status Status { get; set; }
+        public Contact()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

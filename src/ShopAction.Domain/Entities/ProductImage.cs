@@ -15,5 +15,9 @@ namespace ShopAction.Domain.Entities
         public int SortOrder { get; set; }
         public long FileSize { get; set; }
         public Product Product { get; set; }
+        public ProductImage()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

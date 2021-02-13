@@ -10,7 +10,7 @@ using ShopAction.Domain.Entities;
 
 namespace ShopAction.Application.Features.Products.Commands
 {
-    public class EditProductCommand : IRequest<bool>
+    public class EditProductCommand : IRequest<int>
     {
         public Guid ProductId { get; set; }
         public string Name { get; set; }
@@ -19,18 +19,18 @@ namespace ShopAction.Application.Features.Products.Commands
         public int Stock { get; set; }
     }
 
-    public class EditProductCommandHandler : IRequestHandler<EditProductCommand, bool>
+    public class EditProductCommandHandler : IRequestHandler<EditProductCommand, int>
     {
-        private readonly IApplicationDbContext _context;
-        public EditProductCommandHandler(IApplicationDbContext context)
+        private readonly IUnitOfWork unitOfWork;
+        public EditProductCommandHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            this.unitOfWork = unitOfWork;
         }
-        public async Task<bool> Handle(EditProductCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(EditProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == request.ProductId);
-            var productName = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.ProductId);
-            if (product == null)
+            var product = unitOfWork.ProductRepo.Find(x => x.Id == request.ProductId).FirstOrDefault();
+            var productName = unitOfWork.ProductTranslationRepo.Find(x => x.ProductId == request.ProductId).FirstOrDefault();
+            if (product == null || productName == null)
             {
                 throw new NotFoundException();
             }
@@ -38,9 +38,9 @@ namespace ShopAction.Application.Features.Products.Commands
             product.Price = request.Price;
             product.Stock = request.Stock;
             productName.Name = request.Name;
-            var result = await _context.SaveChangeAsync(cancellationToken);
 
-            return result ==1;
+
+            return await unitOfWork.Completed();
 
         }
     }

@@ -27,7 +27,7 @@ namespace ShopAction.Infrastructure.Identity.Models
         public DbSet<ProductInCategory> ProductInCategories { get ; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
 
-        public async Task<int> SaveChangeAsync(CancellationToken cancellationToken)
+        public async Task<int> SaveChangeAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
             return result;
@@ -38,6 +38,5 @@ namespace ShopAction.Infrastructure.Identity.Models
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
         }
-
     }
 }

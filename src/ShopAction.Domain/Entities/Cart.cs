@@ -14,5 +14,10 @@ namespace ShopAction.Domain.Entities
 
         public DateTime DateCreated { get; set; }
         public Guid UserId { get; set; }
+
+        public Cart()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }
