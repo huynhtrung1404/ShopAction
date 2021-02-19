@@ -20,5 +20,8 @@
   <ItemGroup>
     <Folder Include="Common\Interface\Repositories\" />
     <Folder Include="Common\Repositories\" />
+    <Folder Include="Features\UserManager\" />
+    <Folder Include="Features\UserManager\Commands\" />
+    <Folder Include="Common\Extensions\" />
   </ItemGroup>
 </Project>
