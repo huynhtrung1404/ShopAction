@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAction.Application.Features.Products.Commands;
 using ShopAction.Application.Features.Products.Queries;
@@ -8,6 +9,7 @@ using ShopAction.Web.Controllers.Base;
 namespace ShopAction.Web.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class ProductsController : BaseController
     {
@@ -34,13 +36,13 @@ namespace ShopAction.Web.Controllers
 
         [HttpPost]
         [Route("AddProductImage")]
-        public async Task<IActionResult> AddImage([FromForm]UploadProductImageCommand command)
+        public async Task<IActionResult> AddImage([FromForm] UploadProductImageCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
         [HttpPut]
         [Route("UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct([FromBody]EditProductCommand command)
+        public async Task<IActionResult> UpdateProduct([FromBody] EditProductCommand command)
         {
             return Ok(await Mediator.Send(command));
         }

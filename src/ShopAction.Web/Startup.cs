@@ -54,7 +54,7 @@ namespace ShopAction.Web
             app.UseSwaggerUi3();
             app.UseRouting();
             app.UseCors("EnableCors");
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
