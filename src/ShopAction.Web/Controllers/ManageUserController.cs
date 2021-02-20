@@ -19,5 +19,11 @@ namespace ShopAction.Web.Controllers
         {
             return Ok(await Mediator.Send(user));
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(SignInUserManager user)
+        {
+            return Ok(await Mediator.Send(user));
+        }
     }
 }

@@ -9,6 +9,6 @@ namespace ShopAction.Application.Common.Interface
         Task<string> GetUserNameAsync(string userId);
         Task<(Result Result, string UserId)> CreateUserAsync(RegistrationUser user);
         Task<Result> DeleteUserAsync(string userId);
-
+        Task<string> Login(string userName, string password, bool isRemember);
     }
 }
