@@ -29,18 +29,13 @@ namespace ShopAction.Application.Features.Categories.Commands
         {
             await unitOfWork.CategoryRepo.AddAsync(new Category
             {
+                Name = request.Name,
+                Description = request.Description,
                 Status = Status.Active,
                 SortOrder = 1,
                 IsShowOnHome = request.IsShowOnHome
             });
 
-            await unitOfWork.CategoryTranslationRepo.AddAsync(new CategoryTranslation
-            {
-                Id = Guid.NewGuid(),
-                LanguageId = request.LanguageId,
-                SeoDescription = request.Description,
-                Name = request.Name
-            });
 
             var result = await unitOfWork.Completed();
 

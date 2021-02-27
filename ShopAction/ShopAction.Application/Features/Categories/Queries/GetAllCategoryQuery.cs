@@ -6,33 +6,29 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace ShopAction.Application.Features.Categories.Queries
 {
-    public class GetAllCategoryQuery : IRequest<IQueryable<CategoryDto>>
+    public class GetAllCategoryQuery : IRequest<IList<CategoryDto>>
     {
     }
 
-    public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQuery, IQueryable<CategoryDto>>
+    public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQuery, IList<CategoryDto>>
     {
         private readonly IUnitOfWork unitOfWork;
-        public GetAllCategoryQueryHandler(IUnitOfWork unitOfWork)
+        private readonly IMapper mapper;
+        public GetAllCategoryQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
-        public async Task<IQueryable<CategoryDto>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
+        public async Task<IList<CategoryDto>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
         {
-            var result = await Task.Run(() => from c in unitOfWork.CategoryRepo.GetAllData()
-                                              join ci in unitOfWork.CategoryTranslationRepo.GetAllData() on c.Id equals ci.CategoryId
-                                              join lang in unitOfWork.LanguageRepo.GetAllData() on ci.LanguageId equals lang.Id
-                                              select new CategoryDto
-                                              {
-                                                  Id = c.Id.ToString(),
-                                                  Description = ci.SeoDescription,
-                                                  Language = lang.Name,
-                                                  IsShowOnHome = c.IsShowOnHome,
-                                                  Name = ci.Name
-                                              });
+            var data = await Task.Run(() => unitOfWork.CategoryRepo.GetAllData());
+
+            var result = mapper.Map<IList<CategoryDto>>(data);
+
             return result;
 
         }

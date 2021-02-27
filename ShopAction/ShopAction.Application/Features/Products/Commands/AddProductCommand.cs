@@ -18,10 +18,7 @@ namespace ShopAction.Application.Features.Products.Commands
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public int ViewCount { get; set; }
-        public string SeoTitle { get; set; }
-        public string SeoAlias { get; set; }
         public Guid CategoryId { get; set; }
-        public Guid Language { get; set; }
     }
 
     public class AddProductCommandHandler : IRequestHandler<AddProductCommand, int>
@@ -39,16 +36,9 @@ namespace ShopAction.Application.Features.Products.Commands
                 Price = request.Price,
                 DateCreated = DateTime.Now,
                 OriginalPrice = request.Price,
-                Stock = request.Stock
-            });
-            await unitOfWork.ProductTranslationRepo.AddAsync(new ProductTranslation
-            {
-                Description = request.Description,
-                ProductId = request.Id,
+                Stock = request.Stock,
                 Name = request.Name,
-                LanguageId = request.Language,
-                SeoTitle = request.Name,
-                Id = Guid.NewGuid()
+
             });
 
             await unitOfWork.ProductInCategoryRepo.AddAsync(new ProductInCategory

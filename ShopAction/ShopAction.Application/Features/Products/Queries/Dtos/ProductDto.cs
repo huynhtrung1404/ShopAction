@@ -1,8 +1,10 @@
 using System;
+using ShopAction.Application.Common.Mappings;
+using ShopAction.Domain.Entities;
 
 namespace ShopAction.Application.Features.Products.Queries.Dtos
 {
-    public class ProductDto
+    public class ProductDto : IMapFrom<Product>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -13,22 +13,13 @@ namespace ShopAction.Application.Common.Repositories
             this.context = context;
             ProductRepo = new ProductRepository(this.context);
             CategoryRepo = new CategoryRepository(this.context);
-            ProductTranslationRepo = new ProductTranslationRepository(this.context);
             ProductInCategoryRepo = new ProductInCategoryRepository(this.context);
-            CategoryTranslationRepo = new CategoryTranslationRepository(this.context);
-            LanguageRepo = new LanguageRepository(this.context);
         }
         public IProductRepository ProductRepo { get; set; }
 
         public ICategoryRepository CategoryRepo { get; set; }
 
-        public IProductTranslationRepository ProductTranslationRepo { get; set; }
-
         public IProductInCategoryRepository ProductInCategoryRepo { get; set; }
-
-        public ICategoryTranslationRepository CategoryTranslationRepo { get; set; }
-
-        public ILanguageRepository LanguageRepo { get; set; }
 
         public async Task<int> Completed()
         {

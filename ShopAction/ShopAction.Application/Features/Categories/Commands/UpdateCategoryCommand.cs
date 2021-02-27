@@ -30,15 +30,14 @@ namespace ShopAction.Application.Features.Categories.Commands
         public async Task<int> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var info = unitOfWork.CategoryRepo.Find(x => x.Id == request.Id).FirstOrDefault();
-            var infoName = unitOfWork.CategoryTranslationRepo.Find(x => x.CategoryId == request.Id).FirstOrDefault();
-            if (info == null || infoName == null)
+            if (info == null)
             {
                 throw new NotFoundException("Category doesn't exist");
             }
 
             info.IsShowOnHome = request.IsShowOnHome;
             info.Status = request.Status == 1 ? Status.Active : Status.InActive;
-            infoName.Name = request.Name;
+            info.Name = request.Name;
 
             var result = await unitOfWork.Completed();
 

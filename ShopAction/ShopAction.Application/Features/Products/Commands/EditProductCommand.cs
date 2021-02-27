@@ -29,15 +29,14 @@ namespace ShopAction.Application.Features.Products.Commands
         public async Task<int> Handle(EditProductCommand request, CancellationToken cancellationToken)
         {
             var product = unitOfWork.ProductRepo.Find(x => x.Id == request.ProductId).FirstOrDefault();
-            var productName = unitOfWork.ProductTranslationRepo.Find(x => x.ProductId == request.ProductId).FirstOrDefault();
-            if (product == null || productName == null)
+            if (product == null)
             {
                 throw new NotFoundException();
             }
 
             product.Price = request.Price;
             product.Stock = request.Stock;
-            productName.Name = request.Name;
+            product.Name = request.Name;
 
 
             return await unitOfWork.Completed();
