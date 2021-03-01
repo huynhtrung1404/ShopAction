@@ -31,7 +31,7 @@ namespace ShopAction.Application.Features.Products.Queries
         }
         public async Task<ProductDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var data = await Task.Run(() => unitOfWork.ProductRepo.Find(x => x.Id == request.Id).FirstOrDefault());
+            var data = await unitOfWork.ProductRepo.GetByIdAsync(request.Id);
             var result = mapper.Map<ProductDto>(data);
             return result;
 
