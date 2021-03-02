@@ -1,8 +1,11 @@
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using ShopAction.Application;
 using ShopAction.Infrastructure;
 
@@ -25,6 +28,7 @@ namespace ShopAction.Web
             services.AddApplication();
             services.AddSwaggerDocument(
                config =>
+               {
                    config.PostProcess = document =>
                    {
                        document.Info.Version = "v1";
@@ -36,7 +40,19 @@ namespace ShopAction.Web
                            Email = "huynh.trung140495@outlook.com",
                            Url = string.Empty
                        };
-                   }
+                   };
+                   config.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                   {
+                       Type = OpenApiSecuritySchemeType.ApiKey,
+                       Name = "Authorization",
+                       In = OpenApiSecurityApiKeyLocation.Header,
+                       Description = "Type into the textbox: Bearer {your JWT token}."
+                   });
+
+                   config.OperationProcessors.Add(
+                       new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+
+               }
                );
             services.AddCors(x => x.AddPolicy("EnableCors", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
