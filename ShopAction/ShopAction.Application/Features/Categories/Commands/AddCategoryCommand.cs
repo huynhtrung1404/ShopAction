@@ -13,9 +13,7 @@ namespace ShopAction.Application.Features.Categories.Commands
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsShowOnHome { get; set; }
-        public int Status { get; set; }
-        public string SeoTile { get; set; }
-        public Guid LanguageId { get; set; }
+
     }
 
     public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, int>
@@ -37,9 +35,7 @@ namespace ShopAction.Application.Features.Categories.Commands
             });
 
 
-            var result = await unitOfWork.Completed();
-
-            return result;
+            return await unitOfWork.Completed();
         }
     }
 }
