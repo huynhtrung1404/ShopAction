@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAction.Application.Features.Products.Commands;
@@ -9,21 +10,24 @@ using ShopAction.Web.Controllers.Base;
 namespace ShopAction.Web.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("api/[controller]")]
     public class ProductsController : BaseController
     {
+        public ProductsController(IMediator mediator):base(mediator)
+        {
+
+        }
         [HttpGet]
         [Route("GetAllProduct")]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await Mediator.Send(new GetListProduct()));
+            return Ok(await _mediator.Send(new GetListProduct()));
         }
         [HttpGet]
         [Route("GetProductById")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await Mediator.Send(new GetProductByIdQuery(id)));
+            return Ok(await _mediator.Send(new GetProductByIdQuery(id)));
         }
 
         [HttpPost]
@@ -31,20 +35,20 @@ namespace ShopAction.Web.Controllers
         public async Task<IActionResult> Add(AddProductCommand command)
         {
             command.Id = Guid.NewGuid();
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpPost]
         [Route("AddProductImage")]
         public async Task<IActionResult> AddImage([FromForm] UploadProductImageCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
         [HttpPut]
         [Route("UpdateProduct")]
         public async Task<IActionResult> UpdateProduct([FromBody] EditProductCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
     }
 }

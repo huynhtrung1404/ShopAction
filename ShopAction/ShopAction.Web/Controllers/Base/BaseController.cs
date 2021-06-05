@@ -8,7 +8,11 @@ namespace ShopAction.Web.Controllers.Base
     [ApiController]
     public abstract class BaseController : ControllerBase
     {
-        private IMediator _mediator;
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        protected readonly IMediator _mediator;
+
+        public BaseController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
     }
 }

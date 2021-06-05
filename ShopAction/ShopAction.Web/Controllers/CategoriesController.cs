@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopAction.Application.Features.Categories.Commands;
@@ -16,25 +17,29 @@ namespace ShopAction.Web.Controllers
     [ApiController]
     public class CategoriesController : BaseController
     {
+        public CategoriesController(IMediator mediator):base(mediator)
+        {
+
+        }
         [HttpGet]
         [Route("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory()
         {
-            return Ok(await Mediator.Send(new GetAllCategoryQuery()));
+            return Ok(await _mediator.Send(new GetAllCategoryQuery()));
         }
 
         [HttpPost]
         [Route("AddNewCategory")]
         public async Task<IActionResult> AddNewCategory(AddCategoryCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpPut]
         [Route("UpdateCategory")]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
     }
 }
