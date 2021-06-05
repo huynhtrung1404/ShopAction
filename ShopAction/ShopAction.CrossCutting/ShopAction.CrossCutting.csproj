@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShopAction.CrossCutting\ShopAction.CrossCutting.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Enumeration\" />
   </ItemGroup>
 </Project>

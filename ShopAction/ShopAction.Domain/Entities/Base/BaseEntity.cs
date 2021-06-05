@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopAction.Domain.Entities.Base
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public Guid Id { get; set; }
     }
