@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShopAction.Application\ShopAction.Application.csproj" />
+    <ProjectReference Include="..\ShopAction.Domain\ShopAction.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,4 +16,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Persistences\" />
+    <None Remove="Persistences\Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistences\" />
+    <Folder Include="Persistences\Repositories\" />
+  </ItemGroup>
 </Project>

@@ -4,26 +4,22 @@ using System.Threading.Tasks;
 
 namespace ShopAction.Domain.Interfaces
 {
-    public interface IGenericrepository<TEntity, TId> where TEntity:class
+    public interface IGenericRepository<TEntity, TId> where TEntity:class
     {
         Task<IEnumerable<TEntity>> GetAllData();
 
         Task<TEntity> FindByIdAsync(TId id);
 
-        Task<bool> AddAsync(TEntity entity);
+        Task AddAsync(TEntity entity);
 
-        Task<bool> AddRangeAsync(IEnumerable<TEntity> entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entity);
 
-        Task DeleteAsync(TId id);
+        void DeleteRange(IEnumerable<TEntity> entities);
 
-        Task DeleteRangeAsync(IList<TId> ids);
+        void Delete(TEntity entity);
 
-        void Delete(TId id);
+        void Update(TEntity entity);
 
-        void DeleteRange(IEnumerable<TId> id);
-
-        Task<bool> UpdateAsync(TEntity entity);
-
-        Task<bool> UpdateRangeAsync(IEnumerable<TEntity> entitties);
+        void UpdateRange(IEnumerable<TEntity> entitties);
     }
 }
