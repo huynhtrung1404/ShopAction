@@ -9,8 +9,8 @@
     <PackageReference Include="FluentValidation" Version="10.2.3" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.2.3" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,10 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Interface\Repositories\" />
-    <Folder Include="Common\Repositories\" />
-    <Folder Include="Features\UserManager\" />
-    <Folder Include="Features\UserManager\Commands\" />
-    <Folder Include="Common\Extensions\" />
+    <None Remove="Common\Interface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Interface\" />
   </ItemGroup>
 </Project>

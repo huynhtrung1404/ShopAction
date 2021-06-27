@@ -8,9 +8,9 @@ namespace ShopAction.Domain.Interfaces
     {
         IDisposable BeginTransaction(IsolationLevel level);
 
-        void CommitChange();
+        void CommitChanges();
 
-        Task CommitChangeAsync();
+        Task CommitChangesAsync();
 
         void CommitTransaction();
 

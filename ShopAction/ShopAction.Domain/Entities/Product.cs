@@ -17,7 +17,7 @@ namespace ShopAction.Domain.Entities
         public string SeoAlias { get; set; }
         public bool Discontinued { get; set; }
         public Supplier Supplier { get; set; }
-        public List<ProductInCategory> ProductInCategories { get; set; }
+        public ICollection<Category> Categories { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
         public List<ProductImage> ProductImages { get; set; }
         public Product()

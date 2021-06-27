@@ -1,8 +1,8 @@
 ﻿using System;
 namespace ShopAction.CrossCutting.Constants
 {
-    public class AppConstant
+    public static class AppConstant
     {
-      
+        public const string ConnectionString = "DefaultConnection";
     }
 }

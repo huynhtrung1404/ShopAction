@@ -1,14 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShopAction.Application.Common.Interface;
-using ShopAction.Infrastructure.Identity;
-using ShopAction.Infrastructure.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using ShopAction.CrossCutting.Constants;
+using ShopAction.Infrastructure.Persistences;
 
 namespace ShopAction.Infrastructure
 {
@@ -16,7 +10,7 @@ namespace ShopAction.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-          
+            services.AddDbContext<AppDbContext>(x => x.UseSqlServer(configuration.GetConnectionString(AppConstant.ConnectionString)));
             return services;
         }
     }
