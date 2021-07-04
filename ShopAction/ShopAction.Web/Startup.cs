@@ -1,11 +1,9 @@
-using System.Linq;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSwag;
-using NSwag.Generation.Processors.Security;
 using ShopAction.Application;
 using ShopAction.Application.Common.Interface;
 using ShopAction.Infrastructure;
@@ -43,18 +41,7 @@ namespace ShopAction.Web
                            Url = string.Empty
                        };
                    };
-                   config.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-                   {
-                       Type = OpenApiSecuritySchemeType.ApiKey,
-                       Name = "Authorization",
-                       In = OpenApiSecurityApiKeyLocation.Header,
-                       Description = "Type into the textbox: Bearer {your JWT token}."
-                   });
-
-                   config.OperationProcessors.Add(
-                       new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-
-               }
+                }
                );
             services.AddCors(x => x.AddPolicy("EnableCors", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
             services.AddTransient<ICurrentUserService, CurrentUserService>();
@@ -73,7 +60,6 @@ namespace ShopAction.Web
             app.UseSwaggerUi3();
             app.UseRouting();
             app.UseCors("EnableCors");
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

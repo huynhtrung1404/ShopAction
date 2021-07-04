@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShopAction.Domain.Interfaces
 {
     public interface IGenericRepository<TEntity, TId> where TEntity:class
     {
-        Task<IEnumerable<TEntity>> GetAllData();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
         Task<TEntity> FindByIdAsync(TId id);
 
@@ -21,5 +22,8 @@ namespace ShopAction.Domain.Interfaces
         void Update(TEntity entity);
 
         void UpdateRange(IEnumerable<TEntity> entitties);
+
+        Task<IEnumerable<TEntity>> GetAllAndPagingAsync(int pageSize, int pageNumber);
+
     }
 }

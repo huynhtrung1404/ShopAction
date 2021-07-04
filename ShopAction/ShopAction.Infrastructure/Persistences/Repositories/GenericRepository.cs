@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ShopAction.Application.Common.Extensions;
 using ShopAction.Domain.Interfaces;
 
 namespace ShopAction.Infrastructure.Persistences.Repositories
@@ -19,7 +20,7 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             DbSet = context.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllData()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await DbContext.Set<TEntity>().ToListAsync();
         }
@@ -57,6 +58,11 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
         public void Delete(TEntity entity)
         {
             DbContext.Set<TEntity>().Remove(entity);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAndPagingAsync(int pageSize, int pageNumber)
+        {
+            return await DbContext.Set<TEntity>().ToPaginationAsync(pageSize, pageNumber);
         }
     }
 }
