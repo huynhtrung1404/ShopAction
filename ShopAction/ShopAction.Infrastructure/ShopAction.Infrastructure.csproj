@@ -19,11 +19,11 @@
   <ItemGroup>
     <None Remove="Persistences\" />
     <None Remove="Persistences\Repositories\" />
-    <None Remove="Confogurations\" />
+    <None Remove="Persistences\Identity\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistences\" />
     <Folder Include="Persistences\Repositories\" />
-    <Folder Include="Confogurations\" />
+    <Folder Include="Persistences\Identity\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Extensions;
@@ -60,9 +61,14 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             DbContext.Set<TEntity>().Remove(entity);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAndPagingAsync(int pageSize, int pageNumber)
+        public async Task<IEnumerable<TEntity>> GetAllIncludePagingAsync(int pageSize, int pageNumber)
         {
             return await DbContext.Set<TEntity>().ToPaginationAsync(pageSize, pageNumber);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate) where TItem : class
+        {
+            return await DbContext.Set<TEntity>().Include(predicate).ToListAsync();
         }
     }
 }

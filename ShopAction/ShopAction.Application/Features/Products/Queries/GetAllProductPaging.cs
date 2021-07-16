@@ -37,7 +37,7 @@ namespace ShopAction.Application.Features.Products.Queries
 
         public async Task<IEnumerable<ProductDto>> Handle(GetAllProductPaging request, CancellationToken cancellationToken)
         {
-            var products = await _productRepository.GetAllAndPagingAsync(request.PageSize, request.PageIndex);
+            var products = await _productRepository.GetAllIncludePagingAsync(request.PageSize, request.PageIndex);
 
             var results = _mapper.Map<IEnumerable<ProductDto>>(products);
 

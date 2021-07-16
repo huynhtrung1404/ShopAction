@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ShopAction.Domain.Interfaces
@@ -23,7 +24,9 @@ namespace ShopAction.Domain.Interfaces
 
         void UpdateRange(IEnumerable<TEntity> entitties);
 
-        Task<IEnumerable<TEntity>> GetAllAndPagingAsync(int pageSize, int pageNumber);
+        Task<IEnumerable<TEntity>> GetAllIncludePagingAsync(int pageSize, int pageNumber);
+
+        Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity,TItem>> predicate) where TItem : class;
 
     }
 }

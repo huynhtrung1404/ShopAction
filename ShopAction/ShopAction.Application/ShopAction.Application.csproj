@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="FluentValidation" Version="10.2.3" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.2.3" />
+    <PackageReference Include="FluentValidation" Version="10.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
@@ -26,6 +26,7 @@
     <None Remove="Mapping\" />
     <None Remove="Models\" />
     <None Remove="Common\Extensions\" />
+    <None Remove="Specifications\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\Interface\" />
@@ -36,5 +37,6 @@
     <Folder Include="Mappings\" />
     <Folder Include="Models\" />
     <Folder Include="Common\Extensions\" />
+    <Folder Include="Specifications\" />
   </ItemGroup>
 </Project>
