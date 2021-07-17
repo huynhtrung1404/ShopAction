@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="10.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopAction.Domain\ShopAction.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Common\Interface\" />
+    <None Remove="Features\" />
+    <None Remove="Features\Products\" />
+    <None Remove="Features\Products\Queries\" />
+    <None Remove="Dtos\" />
+    <None Remove="Mapping\" />
+    <None Remove="Models\" />
+    <None Remove="Common\Extensions\" />
+    <None Remove="Specifications\" />
+    <None Remove="Features\Products\Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Interface\" />
+    <Folder Include="Features\" />
+    <Folder Include="Features\Products\" />
+    <Folder Include="Features\Products\Queries\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Models\" />
+    <Folder Include="Common\Extensions\" />
+    <Folder Include="Specifications\" />
+    <Folder Include="Features\Products\Commands\" />
+  </ItemGroup>
+</Project>

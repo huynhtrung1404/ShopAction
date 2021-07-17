@@ -3,13 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Domain", "src\ShopAction.Domain\ShopAction.Domain.csproj", "{184BC2BB-4C01-4DAC-AFD3-2A65EA478E5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Domain", "ShopAction\ShopAction.Domain\ShopAction.Domain.csproj", "{184BC2BB-4C01-4DAC-AFD3-2A65EA478E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Application", "src\ShopAction.Application\ShopAction.Application.csproj", "{13A07D41-8248-4BA2-8CBB-3DFA73CA122E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Application", "ShopAction\ShopAction.Application\ShopAction.Application.csproj", "{13A07D41-8248-4BA2-8CBB-3DFA73CA122E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Infrastructure", "src\ShopAction.Infrastructure\ShopAction.Infrastructure.csproj", "{C4A846FD-8F17-40A2-8035-CEBD7B534D23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Infrastructure", "ShopAction\ShopAction.Infrastructure\ShopAction.Infrastructure.csproj", "{C4A846FD-8F17-40A2-8035-CEBD7B534D23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Web", "src\ShopAction.Web\ShopAction.Web.csproj", "{BCB05BA7-8193-4619-A9DC-8003C5C33D1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.Web", "ShopAction\ShopAction.Web\ShopAction.Web.csproj", "{BCB05BA7-8193-4619-A9DC-8003C5C33D1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C6A5F9E8-DD90-43D0-8110-4099C62216F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationCore", "ApplicationCore", "{232AE053-C448-4DEB-BDE2-358CEE3F387E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A3873F76-EF8C-4DF0-8590-5A42B77506CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{17E04D09-4798-480E-81C3-2B1761E07BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.CrossCutting", "ShopAction\ShopAction.CrossCutting\ShopAction.CrossCutting.csproj", "{A209DB5B-C525-4184-A6A7-7E0E1670E227}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E86F7A16-260C-4446-B71A-6B5EDF983CB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAction.IntegrationTest", "ShopAction\ShopAction.IntegrationTest\ShopAction.IntegrationTest.csproj", "{ADEECFC3-281D-46AA-9C93-8AA4CCDDD512}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +47,27 @@ Global
 		{BCB05BA7-8193-4619-A9DC-8003C5C33D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCB05BA7-8193-4619-A9DC-8003C5C33D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCB05BA7-8193-4619-A9DC-8003C5C33D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A209DB5B-C525-4184-A6A7-7E0E1670E227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A209DB5B-C525-4184-A6A7-7E0E1670E227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A209DB5B-C525-4184-A6A7-7E0E1670E227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A209DB5B-C525-4184-A6A7-7E0E1670E227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADEECFC3-281D-46AA-9C93-8AA4CCDDD512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEECFC3-281D-46AA-9C93-8AA4CCDDD512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEECFC3-281D-46AA-9C93-8AA4CCDDD512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEECFC3-281D-46AA-9C93-8AA4CCDDD512}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8F385DF-106D-4A63-AFA8-27DC2AACA6A3}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BCB05BA7-8193-4619-A9DC-8003C5C33D1E} = {C6A5F9E8-DD90-43D0-8110-4099C62216F6}
+		{13A07D41-8248-4BA2-8CBB-3DFA73CA122E} = {232AE053-C448-4DEB-BDE2-358CEE3F387E}
+		{184BC2BB-4C01-4DAC-AFD3-2A65EA478E5E} = {232AE053-C448-4DEB-BDE2-358CEE3F387E}
+		{C4A846FD-8F17-40A2-8035-CEBD7B534D23} = {A3873F76-EF8C-4DF0-8590-5A42B77506CF}
+		{A209DB5B-C525-4184-A6A7-7E0E1670E227} = {17E04D09-4798-480E-81C3-2B1761E07BFF}
+		{ADEECFC3-281D-46AA-9C93-8AA4CCDDD512} = {E86F7A16-260C-4446-B71A-6B5EDF983CB7}
 	EndGlobalSection
 EndGlobal
