@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using ShopAction.Application.Common.Extensions;
 using ShopAction.Application.Dtos;
+using ShopAction.Application.Models;
 using ShopAction.Domain.Entities;
 using ShopAction.Domain.Interfaces;
 
@@ -16,12 +15,10 @@ namespace ShopAction.Application.Features.Products.Queries
     {
         public GetAllProductPaging(int pageSize, int pageIndex)
         {
-            PageSize = pageSize;
-            PageIndex = pageIndex;
+            PagingModel = new PagingModel(pageSize, pageIndex);
         }
 
-        public int PageSize { get; set; }
-        public int PageIndex { get; set; }
+        public PagingModel PagingModel { get; set; }
     }
 
     public class GetAllProductPagingHandler : IRequestHandler<GetAllProductPaging, IEnumerable<ProductDto>>
@@ -37,7 +34,7 @@ namespace ShopAction.Application.Features.Products.Queries
 
         public async Task<IEnumerable<ProductDto>> Handle(GetAllProductPaging request, CancellationToken cancellationToken)
         {
-            var products = await _productRepository.GetAllIncludePagingAsync(request.PageSize, request.PageIndex);
+            var products = await _productRepository.GetAllIncludePagingAsync(request.PagingModel.PageSize, request.PagingModel.PageNumber);
 
             var results = _mapper.Map<IEnumerable<ProductDto>>(products);
 

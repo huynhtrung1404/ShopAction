@@ -26,7 +26,7 @@ namespace ShopAction.Domain.Interfaces
 
         Task<IEnumerable<TEntity>> GetAllIncludePagingAsync(int pageSize, int pageNumber);
 
-        Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity,TItem>> predicate) where TItem : class;
+        Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity,TItem>> predicate, int pageSize, int pageNumber) where TItem : class;
 
     }
 }

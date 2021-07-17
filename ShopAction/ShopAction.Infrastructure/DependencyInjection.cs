@@ -15,6 +15,7 @@ namespace ShopAction.Infrastructure
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(configuration.GetConnectionString(AppConstant.ConnectionString)));
             services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

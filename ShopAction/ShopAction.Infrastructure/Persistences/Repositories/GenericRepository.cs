@@ -66,9 +66,9 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             return await DbContext.Set<TEntity>().ToPaginationAsync(pageSize, pageNumber);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate) where TItem : class
+        public async Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate, int pageSize, int pageNumber) where TItem : class
         {
-            return await DbContext.Set<TEntity>().Include(predicate).ToListAsync();
+            return await DbContext.Set<TEntity>().Include(predicate).ToPaginationAsync(pageSize, pageNumber);
         }
     }
 }

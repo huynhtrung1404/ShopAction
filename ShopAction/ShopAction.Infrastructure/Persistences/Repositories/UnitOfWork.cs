@@ -53,6 +53,15 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             }
         }
 
+        private async Task ReleaseTransactionAsync(DbTransaction transaction)
+        {
+            if (transaction != null)
+            {
+                await transaction.DisposeAsync();
+                transaction = null;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -115,7 +124,7 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             catch (DbUpdateConcurrencyException ex)
             {
                 var databaseValues = ex.Entries.FirstOrDefault().GetDatabaseValues().Properties.ToDictionary(x => x.Name, x => x.PropertyInfo);
-                throw;
+                throw new Exception(databaseValues.ToString());
             }
         }
 
@@ -128,10 +137,30 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             catch (DbUpdateConcurrencyException ex)
             {
                 var databaseValues = ex.Entries.FirstOrDefault().GetDatabaseValues().Properties.ToDictionary(x => x.Name, x => x.PropertyInfo);
-                //throw new Shared.CrossCutting.Exceptions.DbUpdateConcurrencyException(databaseValues);
-                throw new Exception("");
+                throw new Exception(databaseValues.ToString());
             }
 
+        }
+
+        public virtual async Task CommitTransactionAsync()
+        {
+            var transaction = DbTransaction;
+            if (transaction == null)
+            {
+                throw new ApplicationException("Cannot roll back a transaction while there is no transaction running.");
+            }
+
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                await ReleaseTransactionAsync(transaction);
+            }
+            catch
+            {
+                RollbackTransaction();
+                throw;
+            }
         }
 
         #endregion

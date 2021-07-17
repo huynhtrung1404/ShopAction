@@ -27,6 +27,7 @@
     <None Remove="Models\" />
     <None Remove="Common\Extensions\" />
     <None Remove="Specifications\" />
+    <None Remove="Features\Products\Commands\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\Interface\" />
@@ -38,5 +39,6 @@
     <Folder Include="Models\" />
     <Folder Include="Common\Extensions\" />
     <Folder Include="Specifications\" />
+    <Folder Include="Features\Products\Commands\" />
   </ItemGroup>
 </Project>
