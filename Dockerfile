@@ -3,11 +3,12 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ShopAction/ShopAction.Web/*.csproj ./ShopAction.Web/
-COPY ShopAction/ShopAction.Application/*.csproj ./ShopAction.Application/
-COPY ShopAction/ShopAction.Infrastructure/*.csproj ./ShopAction.Infrastructure/
-COPY ShopAction/ShopAction.Domain/*.csproj ./ShopAction.Domain/
-RUN dotnet restore "ShopAction.Web/ShopAction.Web.csproj"
+COPY ShopAction/ShopAction.Web/*.csproj ./ShopAction/ShopAction.Web/
+COPY ShopAction/ShopAction.Application/*.csproj ./ShopAction/ShopAction.Application/
+COPY ShopAction/ShopAction.Infrastructure/*.csproj ./ShopAction/ShopAction.Infrastructure/
+COPY ShopAction/ShopAction.Domain/*.csproj ./
+COPY ShopAction/ShopAction.CrossCutting/*.csproj ./ShopAction/ShopAction.CrossCutting/
+RUN dotnet restore "ShopAction/ShopAction.Web/ShopAction.Web.csproj"
 COPY . .
 WORKDIR /src/ShopAction/ShopAction.Web
 RUN dotnet build "ShopAction.Web.csproj" -c Release -o /app/build

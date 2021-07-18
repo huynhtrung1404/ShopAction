@@ -12,10 +12,6 @@ namespace ShopAction.Domain.Entities
         public DateTime HireDay { get; set; }
         public string Address { get; set; }
         public Guid ManagerId { get; set; }
-        public List<Order> Order { get; set; }
-        public Employee()
-        {
-            Id = Guid.NewGuid();
-        }
+        public virtual List<Order> Order { get; set; }
     }
 }

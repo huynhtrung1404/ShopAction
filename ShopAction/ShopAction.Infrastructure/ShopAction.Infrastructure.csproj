@@ -14,16 +14,20 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Persistences\" />
     <None Remove="Persistences\Repositories\" />
     <None Remove="Persistences\Identity\" />
+    <None Remove="Persistences\Configurations\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistences\" />
     <Folder Include="Persistences\Repositories\" />
     <Folder Include="Persistences\Identity\" />
+    <Folder Include="Persistences\Configurations\" />
   </ItemGroup>
 </Project>

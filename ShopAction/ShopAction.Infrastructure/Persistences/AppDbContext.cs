@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Interface;
 using ShopAction.Domain.Entities;
 using ShopAction.Domain.Entities.Base;
+using ShopAction.Infrastructure.Persistences.Configurations;
 
 namespace ShopAction.Infrastructure.Persistences
 {
@@ -16,13 +17,17 @@ namespace ShopAction.Infrastructure.Persistences
             _currentUserService = currentUserService;
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Category { get; set; }
-        public DbSet<ProductImage> Images { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            var assembly = typeof(AppEntityTypeBaseConfiguration<>).Assembly;
+            builder.ApplyConfigurationsFromAssembly(assembly);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -46,5 +51,13 @@ namespace ShopAction.Infrastructure.Persistences
 
             return result;
         }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<ProductImage> Images { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
     }
 }
