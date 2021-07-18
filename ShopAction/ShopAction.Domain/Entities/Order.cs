@@ -16,12 +16,8 @@ namespace ShopAction.Domain.Entities
         public string ShipEmail { get; set; }
         public string ShipPhoneNumber { get; set; }
         public OrderStatus Status { get; set; }
-        public Employee Employee { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
-        public List<Customer> Customers { get; set; }
-        public Order()
-        {
-            Id = Guid.NewGuid();
-        }
+        public virtual Employee Employee { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
+        public virtual List<Customer> Customers { get; set; }
     }
 }

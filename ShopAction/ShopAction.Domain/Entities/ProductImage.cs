@@ -14,10 +14,6 @@ namespace ShopAction.Domain.Entities
         public DateTime DateCreated { get; set; }
         public int SortOrder { get; set; }
         public long FileSize { get; set; }
-        public Product Product { get; set; }
-        public ProductImage()
-        {
-            Id = Guid.NewGuid();
-        }
+        public virtual Product Product { get; set; }
     }
 }

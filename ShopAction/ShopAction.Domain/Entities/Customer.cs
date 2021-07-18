@@ -11,10 +11,6 @@ namespace ShopAction.Domain.Entities
         public string City { get; set; }
         public string Telephone { get; set; }
         public string Region { get; set; }
-        public Order Order { get; set; }
-        public Customer()
-        {
-            Id = Guid.NewGuid();
-        }
+        public virtual Order Order { get; set; }
     }
 }

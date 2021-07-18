@@ -16,9 +16,5 @@ namespace ShopAction.Domain.Entities
         public string Phone { get; set; }
         public string Homepage { get; set; }
         public List<Product> Products { get; set; }
-        public Supplier()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }
