@@ -17,21 +17,23 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.8" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
     <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.9" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Persistences\" />
     <None Remove="Persistences\Repositories\" />
-    <None Remove="Persistences\Identity\" />
     <None Remove="Persistences\Configurations\" />
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="IdentityServer4.EntityFramework" />
     <None Remove="IdentityServer4.EntityFramework.Storage" />
+    <None Remove="Microsoft.AspNetCore.Identity.UI" />
+    <None Remove="IdentityServer4.AspNetIdentity" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistences\" />
     <Folder Include="Persistences\Repositories\" />
-    <Folder Include="Persistences\Identity\" />
     <Folder Include="Persistences\Configurations\" />
   </ItemGroup>
 </Project>

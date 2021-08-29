@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Interface;
 using ShopAction.CrossCutting.Constants;
@@ -10,7 +12,7 @@ using ShopAction.Infrastructure.Persistences.Configurations;
 
 namespace ShopAction.Infrastructure.Persistences
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
         private readonly ICurrentUserService _currentUserService;
         public AppDbContext(DbContextOptions<AppDbContext> options,

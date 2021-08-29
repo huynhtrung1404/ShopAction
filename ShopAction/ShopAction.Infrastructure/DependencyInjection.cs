@@ -1,4 +1,6 @@
+using System;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,14 +21,14 @@ namespace ShopAction.Infrastructure
             services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
                 .AddConfigurationStore(options =>
                 {
                     options.ConfigureDbContext = b => b.UseSqlServer(configuration.GetConnectionString(AppConstant.ConnectionString), sql => sql.MigrationsAssembly(migrationsAssembly));
                 }).AddOperationalStore(options => {
                     options.ConfigureDbContext = b => b.UseSqlServer(configuration.GetConnectionString(AppConstant.ConnectionString), sql => sql.MigrationsAssembly(migrationsAssembly));
-                });
+                }).AddAspNetIdentity<IdentityUser<Guid>>();
             return services;
         }
     }
