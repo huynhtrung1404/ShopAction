@@ -1,11 +1,14 @@
 
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopAction.Application;
 using ShopAction.Application.Common.Interface;
+using ShopAction.CrossCutting.Constants;
 using ShopAction.Infrastructure;
 using ShopAction.Web.Services;
 

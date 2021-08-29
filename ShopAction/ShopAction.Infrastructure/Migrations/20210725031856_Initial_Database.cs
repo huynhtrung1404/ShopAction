@@ -3,12 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShopAction.Infrastructure.Migrations
 {
-    public partial class create_Database_without_dbset : Migration
+    public partial class Initial_Database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Product");
+
             migrationBuilder.CreateTable(
                 name: "Categories",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -30,6 +34,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Employees",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -51,6 +56,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Suppliers",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -75,6 +81,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Orders",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -97,6 +104,7 @@ namespace ShopAction.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_Employees_EmployeeId",
                         column: x => x.EmployeeId,
+                        principalSchema: "Product",
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -104,6 +112,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Products",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -127,6 +136,7 @@ namespace ShopAction.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Products_Suppliers_SupplierId",
                         column: x => x.SupplierId,
+                        principalSchema: "Product",
                         principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -134,6 +144,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Customers",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -155,6 +166,7 @@ namespace ShopAction.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Customers_Orders_OrderId",
                         column: x => x.OrderId,
+                        principalSchema: "Product",
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -162,6 +174,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "CategoryProduct",
+                schema: "Product",
                 columns: table => new
                 {
                     CategoriesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -173,12 +186,14 @@ namespace ShopAction.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_CategoryProduct_Categories_CategoriesId",
                         column: x => x.CategoriesId,
+                        principalSchema: "Product",
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CategoryProduct_Products_ProductsId",
                         column: x => x.ProductsId,
+                        principalSchema: "Product",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -186,6 +201,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OrderDetails",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -204,12 +220,14 @@ namespace ShopAction.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_OrderDetails_Orders_OrderId",
                         column: x => x.OrderId,
+                        principalSchema: "Product",
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductId",
                         column: x => x.ProductId,
+                        principalSchema: "Product",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -217,6 +235,7 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ProductImages",
+                schema: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
@@ -238,6 +257,7 @@ namespace ShopAction.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_ProductImages_Products_ProductId",
                         column: x => x.ProductId,
+                        principalSchema: "Product",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -245,36 +265,43 @@ namespace ShopAction.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryProduct_ProductsId",
+                schema: "Product",
                 table: "CategoryProduct",
                 column: "ProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_OrderId",
+                schema: "Product",
                 table: "Customers",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",
+                schema: "Product",
                 table: "OrderDetails",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ProductId",
+                schema: "Product",
                 table: "OrderDetails",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_EmployeeId",
+                schema: "Product",
                 table: "Orders",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProductId",
+                schema: "Product",
                 table: "ProductImages",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_SupplierId",
+                schema: "Product",
                 table: "Products",
                 column: "SupplierId");
         }
@@ -282,31 +309,40 @@ namespace ShopAction.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoryProduct");
+                name: "CategoryProduct",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Customers",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
+                name: "OrderDetails",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "ProductImages");
+                name: "ProductImages",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Categories",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Orders",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Products",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Employees",
+                schema: "Product");
 
             migrationBuilder.DropTable(
-                name: "Suppliers");
+                name: "Suppliers",
+                schema: "Product");
         }
     }
 }

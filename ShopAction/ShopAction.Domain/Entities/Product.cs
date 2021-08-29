@@ -16,7 +16,7 @@ namespace ShopAction.Domain.Entities
         public DateTime DateCreated { get; set; }
         public string SeoAlias { get; set; }
         public bool Discontinued { get; set; }
-        public Supplier Supplier { get; set; }
+        public virtual Supplier Supplier { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual List<OrderDetail> OrderDetails { get; set; }
         public virtual List<ProductImage> ProductImages { get; set; }

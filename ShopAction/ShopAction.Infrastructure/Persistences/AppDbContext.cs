@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Interface;
+using ShopAction.CrossCutting.Constants;
 using ShopAction.Domain.Entities;
 using ShopAction.Domain.Entities.Base;
 using ShopAction.Infrastructure.Persistences.Configurations;
@@ -22,6 +23,7 @@ namespace ShopAction.Infrastructure.Persistences
             base.OnModelCreating(builder);
             var assembly = typeof(AppEntityTypeBaseConfiguration<>).Assembly;
             builder.ApplyConfigurationsFromAssembly(assembly);
+            builder.HasDefaultSchema(Schemas.Product);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

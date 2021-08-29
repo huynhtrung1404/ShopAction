@@ -1,10 +1,11 @@
 ﻿using System;
 namespace ShopAction.CrossCutting.Extensions
 {
-    public class StringBuilderExtension
+    public static class StringBuilderExtension
     {
-        public StringBuilderExtension()
+        public static string ToStringExtension(this object input)
         {
+            return Convert.ToString(input);
         }
     }
 }
