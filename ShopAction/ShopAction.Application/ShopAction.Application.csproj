@@ -28,6 +28,8 @@
     <None Remove="Common\Extensions\" />
     <None Remove="Specifications\" />
     <None Remove="Features\Products\Commands\" />
+    <None Remove="Features\Users\" />
+    <None Remove="Features\Users\Commands\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\Interface\" />
@@ -40,5 +42,7 @@
     <Folder Include="Common\Extensions\" />
     <Folder Include="Specifications\" />
     <Folder Include="Features\Products\Commands\" />
+    <Folder Include="Features\Users\" />
+    <Folder Include="Features\Users\Commands\" />
   </ItemGroup>
 </Project>

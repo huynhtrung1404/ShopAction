@@ -30,10 +30,12 @@
     <None Remove="IdentityServer4.EntityFramework.Storage" />
     <None Remove="Microsoft.AspNetCore.Identity.UI" />
     <None Remove="IdentityServer4.AspNetIdentity" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistences\" />
     <Folder Include="Persistences\Repositories\" />
     <Folder Include="Persistences\Configurations\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

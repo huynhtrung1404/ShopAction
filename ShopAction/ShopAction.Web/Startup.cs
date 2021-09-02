@@ -27,8 +27,8 @@ namespace ShopAction.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddInfrastructure(Configuration);
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
             services.AddSwaggerDocument(
                config =>
                {
