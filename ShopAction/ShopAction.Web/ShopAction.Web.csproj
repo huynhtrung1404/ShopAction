@@ -23,14 +23,4 @@
     <ProjectReference Include="..\ShopAction.Application\ShopAction.Application.csproj" />
     <ProjectReference Include="..\ShopAction.Infrastructure\ShopAction.Infrastructure.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\" />
-    <Folder Include="Commons\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Services\" />
-    <None Remove="Commons\" />
-  </ItemGroup>
 </Project>

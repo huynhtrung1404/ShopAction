@@ -10,18 +10,11 @@ using ShopAction.Domain.Interfaces;
 
 namespace ShopAction.Infrastructure.Persistence.Repositories
 {
-    public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId> where TEntity : class
+    public class GenericRepository<TEntity, TId>(DbContext context) : IGenericRepository<TEntity, TId> where TEntity : class
     {
-        public DbContext DbContext { get; }
+        public DbContext DbContext { get; } = context;
 
-        public IQueryable<TEntity> DbSet { get; }
-
-        public GenericRepository(DbContext context)
-        {
-            DbContext = context;
-            DbSet = context.Set<TEntity>();
-        }
-
+        public IQueryable<TEntity> DbSet { get; } = context.Set<TEntity>();
 
         public async Task<TEntity> FindByIdAsync(TId id)
         {
