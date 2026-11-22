@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Extensions;
@@ -21,10 +22,6 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             DbSet = context.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            return await DbContext.Set<TEntity>().ToListAsync();
-        }
 
         public async Task<TEntity> FindByIdAsync(TId id)
         {
@@ -69,6 +66,11 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
         public async Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate, int pageSize, int pageNumber) where TItem : class
         {
             return await DbContext.Set<TEntity>().Include(predicate).ToPaginationAsync(pageSize, pageNumber);
+        }
+
+        public Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
