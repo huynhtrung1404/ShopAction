@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShopAction.Application.Common.Interface;
 using ShopAction.Domain.Interfaces;
 using ShopAction.Infrastructure.Persistence;
 using ShopAction.Infrastructure.Persistence.Repositories;
@@ -13,9 +12,9 @@ namespace ShopAction.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(x => x.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
-            services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

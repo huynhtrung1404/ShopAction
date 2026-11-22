@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Extensions;
 using ShopAction.Domain.Interfaces;
+using ShopAction.Infrastructure.Extensions;
 
 namespace ShopAction.Infrastructure.Persistence.Repositories
 {
@@ -61,5 +62,14 @@ namespace ShopAction.Infrastructure.Persistence.Repositories
             return await DbContext.Set<TEntity>().Include(predicate).ToPaginationAsync(pageSize, pageNumber);
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken)
+        {
+            return await DbContext.Set<TEntity>().ApplySpecification(item).ToListAsync(cancellationToken);
+        }
+
+        public async Task<int> CountAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken)
+        {
+            return await DbContext.Set<TEntity>().ApplySpecificationForCount(item).CountAsync(cancellationToken);
+        }
     }
 }
