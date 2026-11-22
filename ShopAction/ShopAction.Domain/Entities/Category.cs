@@ -1,5 +1,4 @@
-﻿using ShopAction.CrossCutting.Enumeration;
-using ShopAction.Domain.Entities.Base;
+﻿using ShopAction.Domain.Entities.Base;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +11,7 @@ namespace ShopAction.Domain.Entities
         public int SortOrder { get; set; }
         public bool IsShowOnHome { get; set; }
         public int? ParentId { get; set; }
-        public Status Status { get; set; }
+        public string Status { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public Category()
         {

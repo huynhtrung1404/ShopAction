@@ -2,29 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Extensions;
 using ShopAction.Domain.Interfaces;
 
-namespace ShopAction.Infrastructure.Persistences.Repositories
+namespace ShopAction.Infrastructure.Persistence.Repositories
 {
-    public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId> where TEntity : class
+    public class GenericRepository<TEntity, TId>(DbContext context) : IGenericRepository<TEntity, TId> where TEntity : class
     {
-        public DbContext DbContext { get; }
+        public DbContext DbContext { get; } = context;
 
-        public IQueryable<TEntity> DbSet { get; }
-
-        public GenericRepository(DbContext context)
-        {
-            DbContext = context;
-            DbSet = context.Set<TEntity>();
-        }
-
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            return await DbContext.Set<TEntity>().ToListAsync();
-        }
+        public IQueryable<TEntity> DbSet { get; } = context.Set<TEntity>();
 
         public async Task<TEntity> FindByIdAsync(TId id)
         {
@@ -46,9 +36,9 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             DbContext.Set<TEntity>().Update(entity);
         }
 
-        public void UpdateRange(IEnumerable<TEntity> entitties)
+        public void UpdateRange(IEnumerable<TEntity> entities)
         {
-            DbContext.Set<TEntity>().UpdateRange(entitties);
+            DbContext.Set<TEntity>().UpdateRange(entities);
         }
 
         public void DeleteRange(IEnumerable<TEntity> entities)
@@ -69,6 +59,11 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
         public async Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate, int pageSize, int pageNumber) where TItem : class
         {
             return await DbContext.Set<TEntity>().Include(predicate).ToPaginationAsync(pageSize, pageNumber);
+        }
+
+        public Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

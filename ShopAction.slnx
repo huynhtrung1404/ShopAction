@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/ShopAction/">
+    <Project Path="ShopAction/ShopAction.Application/ShopAction.Application.csproj" />
+    <Project Path="ShopAction/ShopAction.CrossCutting/ShopAction.CrossCutting.csproj" />
+    <Project Path="ShopAction/ShopAction.Domain/ShopAction.Domain.csproj" />
+    <Project Path="ShopAction/ShopAction.Infrastructure/ShopAction.Infrastructure.csproj" />
+    <Project Path="ShopAction/ShopAction.IntegrationTest/ShopAction.IntegrationTest.csproj" />
+    <Project Path="ShopAction/ShopAction.Web/ShopAction.Web.csproj" />
+  </Folder>
+</Solution>

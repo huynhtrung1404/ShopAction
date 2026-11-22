@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopAction.Domain.Entities.Base;
 
-namespace ShopAction.Infrastructure.Persistences.Configurations
+namespace ShopAction.Infrastructure.Persistence.Configurations
 {
-    public class AppEntityTypeBaseConfiguration<T> : IEntityTypeConfiguration<T> where T:BaseEntity
+    public class AppEntityTypeBaseConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity
     {
 
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Id).HasDefaultValueSql("newsequentialid()");
+            builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
         }
     }
 }
