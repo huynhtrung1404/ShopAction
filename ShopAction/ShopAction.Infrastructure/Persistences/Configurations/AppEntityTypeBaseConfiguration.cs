@@ -12,7 +12,7 @@ namespace ShopAction.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Id).HasDefaultValue(Guid.NewGuid());
+
         }
     }
 }

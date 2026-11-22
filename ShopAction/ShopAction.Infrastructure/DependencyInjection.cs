@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShopAction.Application.Common.Interface;
 using ShopAction.Domain.Interfaces;
 using ShopAction.Infrastructure.Persistence;
 using ShopAction.Infrastructure.Persistence.Repositories;

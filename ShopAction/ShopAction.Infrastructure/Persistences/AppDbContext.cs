@@ -32,7 +32,7 @@ namespace ShopAction.Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedBy = _currentUserService.UserId.ToString();
-                        entry.Entity.Created = DateTime.Now;
+                        entry.Entity.CreatedDate = DateTime.Now;
                         break;
 
                     case EntityState.Modified:
