@@ -24,10 +24,9 @@ namespace ShopAction.Domain.Interfaces
 
         void UpdateRange(IEnumerable<TEntity> entities);
 
-        Task<IEnumerable<TEntity>> GetAllIncludePagingAsync(int pageSize, int pageNumber);
-
-        Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate, int pageSize, int pageNumber) where TItem : class;
         Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken);
+
+        Task<TEntity> GetItemAsync(ISpecification<TEntity> item, CancellationToken cancellationToken);
 
         Task<int> CountAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken);
 

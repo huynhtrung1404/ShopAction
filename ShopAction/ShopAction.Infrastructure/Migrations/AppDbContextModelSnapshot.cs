@@ -16,7 +16,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261122091015_InitinalData";
+    public override string LastMigrationId => "20261122143759_UpdateDb";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -51,7 +51,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("Description")
@@ -60,7 +60,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<bool>("IsShowOnHome")
                     .HasColumnType("boolean");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -101,14 +101,14 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("Emal")
                     .IsRequired()
                     .HasColumnType("text");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -147,7 +147,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("FirstName")
@@ -156,7 +156,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<DateTime>("HireDay")
                     .HasColumnType("timestamp with time zone");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -182,13 +182,13 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<Guid>("EmployeeId")
                     .HasColumnType("uuid");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -235,10 +235,10 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -274,7 +274,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<DateTime>("DateCreated")
@@ -283,7 +283,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<bool>("Discontinued")
                     .HasColumnType("boolean");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -331,7 +331,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<DateTime>("DateCreated")
@@ -343,7 +343,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<bool>("IsDefault")
                     .HasColumnType("boolean");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -394,13 +394,13 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("Homepage")
                     .HasColumnType("text");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -430,13 +430,13 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("Description")
                     .HasColumnType("text");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -459,7 +459,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("Description")
@@ -468,7 +468,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<bool>("IsSystemRole")
                     .HasColumnType("boolean");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -491,10 +491,10 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -524,7 +524,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("Email")
@@ -533,7 +533,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<bool>("IsActive")
                     .HasColumnType("boolean");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -547,6 +547,11 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
 
                 b.HasKey("Id");
 
+                b.HasIndex("Password");
+
+                b.HasIndex("UserName")
+                    .IsUnique();
+
                 b.ToTable("Users", "user");
             });
 
@@ -559,13 +564,13 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<bool>("IsGranted")
                     .HasColumnType("boolean");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")
@@ -595,10 +600,10 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("CreatedBy")
                     .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
+                b.Property<DateTimeOffset>("CreatedDate")
                     .HasColumnType("timestamp with time zone");
 
-                b.Property<DateTime?>("LastModified")
+                b.Property<DateTimeOffset?>("LastModified")
                     .HasColumnType("timestamp with time zone");
 
                 b.Property<string>("LastModifiedBy")

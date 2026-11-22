@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ShopAction.Application.Common.Extensions;
 using ShopAction.Domain.Interfaces;
 using ShopAction.Infrastructure.Extensions;
 
@@ -52,15 +51,6 @@ namespace ShopAction.Infrastructure.Persistence.Repositories
             DbContext.Set<TEntity>().Remove(entity);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllIncludePagingAsync(int pageSize, int pageNumber)
-        {
-            return await DbContext.Set<TEntity>().ToPaginationAsync(pageSize, pageNumber);
-        }
-
-        public async Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity, TItem>> predicate, int pageSize, int pageNumber) where TItem : class
-        {
-            return await DbContext.Set<TEntity>().Include(predicate).ToPaginationAsync(pageSize, pageNumber);
-        }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken)
         {
@@ -70,6 +60,11 @@ namespace ShopAction.Infrastructure.Persistence.Repositories
         public async Task<int> CountAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken)
         {
             return await DbContext.Set<TEntity>().ApplySpecificationForCount(item).CountAsync(cancellationToken);
+        }
+
+        public async Task<TEntity> GetItemAsync(ISpecification<TEntity> item, CancellationToken cancellationToken)
+        {
+            return await DbContext.Set<TEntity>().ApplySpecification(item).FirstOrDefaultAsync(cancellationToken);
         }
     }
 }

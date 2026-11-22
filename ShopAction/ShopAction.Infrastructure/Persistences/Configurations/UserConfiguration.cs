@@ -11,5 +11,7 @@ public class UserConfiguration : AppEntityTypeBaseConfiguration<User>
     {
         base.Configure(builder);
         builder.ToTable("Users", "user");
+        builder.HasIndex(x => x.UserName).IsUnique();
+        builder.HasIndex(x => x.Password);
     }
 }
