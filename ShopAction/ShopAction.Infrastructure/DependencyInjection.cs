@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopAction.CrossCutting.Constants;
 using ShopAction.Domain.Interfaces;
-using ShopAction.Infrastructure.Persistences;
-using ShopAction.Infrastructure.Persistences.Repositories;
+using ShopAction.Infrastructure.Persistence;
+using ShopAction.Infrastructure.Persistence.Repositories;
 
 namespace ShopAction.Infrastructure
 {

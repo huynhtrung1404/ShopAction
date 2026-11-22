@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Domain.Interfaces;
 
-namespace ShopAction.Infrastructure.Persistences.Repositories
+namespace ShopAction.Infrastructure.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

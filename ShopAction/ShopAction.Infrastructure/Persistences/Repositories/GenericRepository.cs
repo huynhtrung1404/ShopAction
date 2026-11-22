@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Extensions;
 using ShopAction.Domain.Interfaces;
 
-namespace ShopAction.Infrastructure.Persistences.Repositories
+namespace ShopAction.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId> where TEntity : class
     {
@@ -43,9 +43,9 @@ namespace ShopAction.Infrastructure.Persistences.Repositories
             DbContext.Set<TEntity>().Update(entity);
         }
 
-        public void UpdateRange(IEnumerable<TEntity> entitties)
+        public void UpdateRange(IEnumerable<TEntity> entities)
         {
-            DbContext.Set<TEntity>().UpdateRange(entitties);
+            DbContext.Set<TEntity>().UpdateRange(entities);
         }
 
         public void DeleteRange(IEnumerable<TEntity> entities)

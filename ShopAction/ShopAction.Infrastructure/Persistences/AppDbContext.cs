@@ -5,15 +5,16 @@ using Microsoft.EntityFrameworkCore;
 using ShopAction.Application.Common.Interface;
 using ShopAction.Domain.Entities;
 using ShopAction.Domain.Entities.Base;
-using ShopAction.Infrastructure.Persistences.Configurations;
+using ShopAction.Infrastructure.Persistence.Configurations;
 
-namespace ShopAction.Infrastructure.Persistences
+namespace ShopAction.Infrastructure.Persistence
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext : DbContext
     {
         private readonly ICurrentUserService _currentUserService;
         public AppDbContext(DbContextOptions<AppDbContext> options,
-            ICurrentUserService currentUserService): base(options) {
+            ICurrentUserService currentUserService) : base(options)
+        {
             _currentUserService = currentUserService;
         }
 
@@ -28,7 +29,6 @@ namespace ShopAction.Infrastructure.Persistences
         {
             optionsBuilder.UseLazyLoadingProxies();
         }
-
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<BaseEntity> entry in ChangeTracker.Entries<BaseEntity>())
@@ -51,13 +51,5 @@ namespace ShopAction.Infrastructure.Persistences
 
             return result;
         }
-
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Category { get; set; }
-        public DbSet<ProductImage> Images { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
     }
 }

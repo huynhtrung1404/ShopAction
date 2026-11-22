@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopAction.Domain.Entities;
 
-namespace ShopAction.Infrastructure.Persistences.Configurations
+namespace ShopAction.Infrastructure.Persistence.Configurations
 {
     public class OrderConfiguration : AppEntityTypeBaseConfiguration<Order>
     {
