@@ -24,11 +24,6 @@ namespace ShopAction.Infrastructure.Persistence
             var assembly = typeof(AppEntityTypeBaseConfiguration<>).Assembly;
             builder.ApplyConfigurationsFromAssembly(assembly);
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-        }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<BaseEntity> entry in ChangeTracker.Entries<BaseEntity>())
