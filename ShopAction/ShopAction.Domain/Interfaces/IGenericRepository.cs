@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShopAction.Domain.Interfaces
 {
-    public interface IGenericRepository<TEntity, TId> where TEntity:class
+    public interface IGenericRepository<TEntity, TId> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAllAsync();
 
         Task<TEntity> FindByIdAsync(TId id);
 
@@ -22,11 +22,13 @@ namespace ShopAction.Domain.Interfaces
 
         void Update(TEntity entity);
 
-        void UpdateRange(IEnumerable<TEntity> entitties);
+        void UpdateRange(IEnumerable<TEntity> entities);
 
-        Task<IEnumerable<TEntity>> GetAllIncludePagingAsync(int pageSize, int pageNumber);
+        Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken);
 
-        Task<IEnumerable<TEntity>> GetAllAsync<TItem>(Expression<Func<TEntity,TItem>> predicate, int pageSize, int pageNumber) where TItem : class;
+        Task<TEntity> GetItemAsync(ISpecification<TEntity> item, CancellationToken cancellationToken);
+
+        Task<int> CountAllAsync(ISpecification<TEntity> item, CancellationToken cancellationToken);
 
     }
 }

@@ -5,13 +5,9 @@ using ShopAction.Domain.Interfaces;
 
 namespace ShopAction.Application.Specifications
 {
-    public abstract class BaseSpecification<TEntity> : ISpecification<TEntity> where TEntity : class
+    public abstract class BaseSpecification<TEntity>(Expression<Func<TEntity, bool>> criteria) : ISpecification<TEntity> where TEntity : class
     {
-        protected BaseSpecification(Expression<Func<TEntity, bool>> criteria)
-        {
-            Criteria = criteria;
-        }
-        public Expression<Func<TEntity, bool>> Criteria { get; }
+        public Expression<Func<TEntity, bool>> Criteria { get; } = criteria;
         public List<Expression<Func<TEntity, object>>> Includes { get; } = new List<Expression<Func<TEntity, object>>>();
         public List<string> IncludeStrings { get; } = new List<string>();
         public Expression<Func<TEntity, object>> OrderBy { get; private set; }

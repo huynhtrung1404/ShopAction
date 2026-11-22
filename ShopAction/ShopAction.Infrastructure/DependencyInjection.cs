@@ -12,9 +12,9 @@ namespace ShopAction.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(x => x.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
-            services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
