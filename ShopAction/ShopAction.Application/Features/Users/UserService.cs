@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Net;
 using ShopAction.Application.Common.Helpers;
+using ShopAction.Application.Common.Models;
 using ShopAction.Domain.Entities.Users;
 using ShopAction.Domain.Interfaces;
 
@@ -41,19 +42,20 @@ public class UserService(IRepository<User, Guid> user, IUnitOfWork unitOfWork) :
 
     public async Task<bool> DeleteUserAsync(Guid id, CancellationToken cancellationToken)
     {
-        var existingData = await _user.FindByIdAsync(id) ?? throw new Exception("No data found");
+        var existingData = await _user.FindByIdAsync(id, cancellationToken) ?? throw new Exception("No data found");
         _user.Delete(existingData);
         await _unitOfWork.CommitChangesAsync();
         return true;
     }
 
-    public async Task<UserResult> GetListUserAsync(int pageSize, int pageNumber, CancellationToken cancellationToken)
+    public async Task<PagedResult<UserDetail>> GetListUserAsync(int pageSize, int pageNumber, CancellationToken cancellationToken)
     {
         var data = await _user.GetAllAsync(new UserSpecification(pageSize, pageNumber), cancellationToken);
         var totalItem = await _user.CountAllAsync(new UserSpecification(pageSize, pageNumber), cancellationToken);
         var result = data.Select(x => new UserDetail(x.Id, x.UserName, x.Email, x.Password, x.IsActive, x.CreatedDate, x.LastModified));
         var totalPage = pageSize == 0 ? 0 : (totalItem + pageSize - 1) / pageSize;
-        return new UserResult(result, totalPage, pageSize, pageNumber);
+
+        return new([.. result], totalItem, pageNumber, pageSize);
     }
 
     public async Task<UserDetail> GetUserById(Guid id, CancellationToken cancellationToken)

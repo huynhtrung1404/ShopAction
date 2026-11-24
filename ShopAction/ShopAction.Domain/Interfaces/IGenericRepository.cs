@@ -10,9 +10,9 @@ namespace ShopAction.Domain.Interfaces
     public interface IGenericRepository<TEntity, TId> where TEntity : class
     {
 
-        Task<TEntity> FindByIdAsync(TId id);
+        Task<TEntity> FindByIdAsync(TId id, CancellationToken cancellationToken = default);
 
-        Task AddAsync(TEntity entity);
+        Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         Task AddRangeAsync(IEnumerable<TEntity> entity);
 

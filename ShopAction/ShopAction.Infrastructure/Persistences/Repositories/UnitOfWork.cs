@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopAction.Domain.Interfaces;
@@ -128,11 +129,11 @@ namespace ShopAction.Infrastructure.Persistence.Repositories
             }
         }
 
-        public virtual async Task CommitChangesAsync()
+        public virtual async Task CommitChangesAsync(CancellationToken cancellationToken)
         {
             try
             {
-                await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync(cancellationToken);
             }
             catch (DbUpdateConcurrencyException ex)
             {

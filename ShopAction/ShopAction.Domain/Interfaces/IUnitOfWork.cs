@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShopAction.Domain.Interfaces
@@ -24,7 +25,7 @@ namespace ShopAction.Domain.Interfaces
         /// Commits the changes.
         /// </summary>
         /// <param name="typeOfDbContext">The type of database context.</param>
-        Task CommitChangesAsync();
+        Task CommitChangesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Commits the transaction.

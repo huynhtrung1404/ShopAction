@@ -4,8 +4,8 @@ public record PermissionDetail(Guid Id,
     string Code,
     string Description,
     string Module,
-    DateTime CreatedDate,
-    DateTime? UpdatedDate,
+    DateTimeOffset CreatedDate,
+    DateTimeOffset? UpdatedDate,
     string CreatedBy,
     string UpdatedBy);
 

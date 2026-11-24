@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ShopAction.Application.Common.Models;
 
 namespace ShopAction.Application.Features.Users;
 
@@ -6,7 +7,7 @@ public interface IUserService
 {
     Task<UserDetail> GetUserById(Guid id, CancellationToken cancellationToken);
 
-    Task<UserResult> GetListUserAsync(int pageSize, int pageNumber, CancellationToken cancellationToken);
+    Task<PagedResult<UserDetail>> GetListUserAsync(int pageSize, int pageNumber, CancellationToken cancellationToken);
 
     Task<bool> AddUserAsync(AddUserRequest request, CancellationToken cancellationToken);
 

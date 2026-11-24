@@ -16,14 +16,14 @@ namespace ShopAction.Infrastructure.Persistence.Repositories
 
         public IQueryable<TEntity> DbSet { get; } = context.Set<TEntity>();
 
-        public async Task<TEntity> FindByIdAsync(TId id)
+        public async Task<TEntity> FindByIdAsync(TId id, CancellationToken cancellationToken)
         {
-            return await DbContext.Set<TEntity>().FindAsync(id);
+            return await DbContext.Set<TEntity>().FindAsync(id, cancellationToken);
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            await DbContext.Set<TEntity>().AddAsync(entity);
+            await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
         }
 
         public async Task AddRangeAsync(IEnumerable<TEntity> entity)
