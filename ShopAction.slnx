@@ -7,7 +7,5 @@
     <Project Path="ShopAction/ShopAction.IntegrationTest/ShopAction.IntegrationTest.csproj" />
     <Project Path="ShopAction/ShopAction.Web/ShopAction.Web.csproj" />
   </Folder>
-  <!-- <Folder Name="/">
-    <Project Path="ShopAction.AppHost/ShopAction.AppHost.csproj" />
-  </Folder> -->
+  <Project Path="ShopAction.Frontend/ShopAction.Frontend.csproj" />
 </Solution>

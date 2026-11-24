@@ -4,6 +4,7 @@ var username = builder.AddParameter("db-user", "admin");
 var password = builder.AddParameter("db-password", "0147");
 builder.AddPostgres("posgres", username, password).WithHostPort(5432)
     .WithLifetime(ContainerLifetime.Persistent)
+    .WithDataVolume("postgres-data-volume")
     .AddDatabase("Poc");
 
 builder.Build().Run();
