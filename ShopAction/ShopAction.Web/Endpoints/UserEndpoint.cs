@@ -1,9 +1,3 @@
-using System;
-using System.Threading;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using ShopAction.Application.Features.Users;
 
 namespace ShopAction.Web.Endpoints;

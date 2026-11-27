@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopAction.Application;
 using ShopAction.Application.Common.Interface;
 using ShopAction.Infrastructure;
-using ShopAction.Web.Endpoints;
 using ShopAction.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,4 +21,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.MapUserEndpoint();
+app.MapPermissionEndpoint();
 app.Run();

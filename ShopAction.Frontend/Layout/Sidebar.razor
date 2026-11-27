@@ -1,0 +1,118 @@
+@using Microsoft.AspNetCore.Components.Routing
+
+<!-- Desktop Sidebar -->
+<aside class="app-sidebar d-none d-lg-flex flex-column">
+
+    <div class="sidebar-brand">
+        <div class="brand-icon">
+            <i class="bi bi-shield-lock"></i>
+        </div>
+
+        <span>Nexus<span class="brand-highlight">.</span></span>
+    </div>
+
+    <nav class="sidebar-navigation flex-grow-1">
+        @NavigationContent
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="sidebar-version">
+            <span class="status-indicator"></span>
+            Frontend Preview v1.0
+        </div>
+    </div>
+
+</aside>
+
+<!-- Mobile Sidebar -->
+<div class="offcanvas offcanvas-start app-mobile-sidebar" tabindex="-1" id="mobileSidebar"
+     aria-labelledby="mobileSidebarLabel">
+
+    <div class="offcanvas-header sidebar-brand">
+        <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon">
+                <i class="bi bi-shield-lock"></i>
+            </div>
+
+            <span id="mobileSidebarLabel">
+                Nexus<span class="brand-highlight">.</span>
+            </span>
+        </div>
+
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close">
+        </button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column">
+        <nav class="sidebar-navigation flex-grow-1">
+            @NavigationContent
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-version">
+                <span class="status-indicator"></span>
+                Frontend Preview v1.0
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    private RenderFragment NavigationContent => @<div>
+
+        <div class="sidebar-section-title">
+            GENERAL
+        </div>
+
+        <NavLink href="/" Match="NavLinkMatch.All" class="sidebar-link">
+
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+
+        </NavLink>
+
+        <div class="sidebar-section-title">
+            IDENTITY MANAGEMENT
+        </div>
+
+        <NavLink href="/users" class="sidebar-link">
+            <i class="bi bi-people"></i>
+            <span>Users</span>
+        </NavLink>
+
+        <NavLink href="/roles" class="sidebar-link">
+            <i class="bi bi-person-badge"></i>
+            <span>Roles</span>
+        </NavLink>
+
+        <NavLink href="/permissions" class="sidebar-link">
+            <i class="bi bi-key"></i>
+            <span>Permissions</span>
+        </NavLink>
+
+        <NavLink href="/policies" class="sidebar-link">
+            <i class="bi bi-shield-check"></i>
+            <span>Policies</span>
+        </NavLink>
+
+        <div class="sidebar-section-title">
+            SECURITY
+        </div>
+
+        <NavLink href="/audit-logs" class="sidebar-link">
+            <i class="bi bi-clock-history"></i>
+            <span>Audit Logs</span>
+        </NavLink>
+
+        <div class="sidebar-section-title">
+            PREFERENCES
+        </div>
+
+        <NavLink href="/settings" class="sidebar-link">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+        </NavLink>
+
+    </div>;
+}
